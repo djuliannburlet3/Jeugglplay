@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hôtel Tycoon Empire</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap');
 
@@ -13,9 +19,15 @@
   --green-soft: #2a4a3d;
   --burgundy: #8a3245;
   --line: rgba(212,175,55,0.18);
+  --diamond: #00e5ff;
 }
 
-*{ box-sizing:border-box; }
+*{ box-sizing:border-box; margin:0; padding:0; }
+
+body {
+  background-color: #050a12;
+  padding: 20px 0;
+}
 
 .htg-app{
   background: radial-gradient(1200px 600px at 50% -10%, #1a2745 0%, var(--navy) 55%) var(--navy);
@@ -27,6 +39,8 @@
   gap:16px;
   max-width: 560px;
   margin: 0 auto;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.5);
 }
 
 .htg-topbar{
@@ -46,6 +60,18 @@
   color: var(--gold-soft);
 }
 .htg-brand-sub{ color: var(--cream); font-weight:600; font-size:11px; display:block; letter-spacing:1.5px; text-transform:uppercase; opacity:0.6; margin-top:2px;}
+
+.htg-prestige-badge{
+  display:inline-block;
+  font-size:11px;
+  font-weight:700;
+  color: #fff;
+  background: linear-gradient(135deg, #a855f7, #6366f1);
+  padding: 2px 8px;
+  border-radius: 20px;
+  margin-top: 4px;
+}
+
 .htg-sixstar-badge{
   display:none;
   margin-left:8px;
@@ -61,6 +87,7 @@
 }
 .htg-stats{ text-align:right; }
 .htg-money{ font-size:20px; font-weight:700; color: var(--gold-soft); font-family:'Playfair Display', serif;}
+.htg-diamonds{ font-size:14px; font-weight:700; color: var(--diamond); margin-top: 2px; }
 .htg-income{ font-size:12px; color: var(--muted); margin-top:2px;}
 
 .htg-panel{
@@ -81,6 +108,41 @@
 .htg-floor-emoji{ font-size:34px; }
 .htg-floor-name{ font-family:'Playfair Display', serif; font-size:21px; font-weight:700; color:var(--cream); }
 .htg-floor-sub{ font-size:12px; color:var(--muted); margin-top:2px; }
+
+/* Zone d'affichage des unités (Cases) */
+.htg-unit-container {
+  margin: 12px 0;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 10px;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+.htg-unit-title {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.htg-unit-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  max-height: 80px;
+  overflow-y: auto;
+}
+.htg-unit-slot {
+  width: 32px;
+  height: 32px;
+  background: var(--navy-light);
+  border: 1px solid rgba(212,175,55,0.3);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
+}
 
 .htg-progress-wrap{ margin: 12px 0 16px; }
 .htg-progress-label{ display:flex; justify-content:space-between; font-size:11px; color:var(--muted); margin-bottom:5px; }
@@ -116,6 +178,81 @@
 }
 .htg-btn small{ display:block; font-weight:500; opacity:0.75; font-size:11px; margin-top:2px;}
 
+/* Section Banque */
+.htg-bank-panel {
+  background: linear-gradient(180deg, #111a2e, #0f1626);
+  border: 1px solid rgba(0, 229, 255, 0.2);
+  border-radius: 16px;
+  padding: 15px;
+}
+.htg-bank-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.htg-bank-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  color: var(--cream);
+  font-weight: 700;
+}
+.htg-bank-rate {
+  font-size: 11px;
+  color: #00e5ff;
+  background: rgba(0, 229, 255, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.htg-bank-balance {
+  font-size: 22px;
+  font-weight: 700;
+  color: #e3f9ff;
+  margin-bottom: 12px;
+  text-align: center;
+  font-family: monospace;
+}
+.htg-bank-actions {
+  display: flex;
+  gap: 8px;
+}
+.htg-btn-bank {
+  flex: 1;
+  padding: 8px;
+  font-size: 11px;
+  border-radius: 8px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+.htg-btn-dep { background: #1e3a8a; color: #fff; }
+.htg-btn-wit { background: #374151; color: #fff; }
+
+/* Section Auto-clic Premium Shop */
+.htg-shop-panel {
+  background: linear-gradient(180deg, #201335, #140b24);
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  border-radius: 16px;
+  padding: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.htg-shop-text { flex: 1; }
+.htg-shop-title { font-size: 14px; font-weight: bold; color: #e9d5ff; }
+.htg-shop-desc { font-size: 11px; color: #c084fc; margin-top: 2px; }
+.htg-btn-shop {
+  background: linear-gradient(135deg, #a855f7, #7e22ce);
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 12px;
+}
+.htg-btn-shop:disabled { opacity: 0.4; cursor: not-allowed; }
+
 .htg-click-zone{ position:relative; }
 .htg-float{
   position:absolute;
@@ -138,7 +275,7 @@
   display:flex;
   flex-direction:column;
   gap:8px;
-  max-height: 320px;
+  max-height: 260px;
   overflow-y:auto;
   padding-right: 2px;
   scrollbar-width: thin;
@@ -180,7 +317,6 @@
 .htg-row-right{ font-size:11px; text-align:right; color:var(--muted); white-space:nowrap; }
 .htg-row-right.unlock-cost{ color: var(--gold-soft); font-weight:700; }
 .htg-check{ color: #5fc79a; font-size:16px; }
-.htg-lock{ font-size:14px; }
 
 .htg-toasts{
   position: fixed;
@@ -210,20 +346,8 @@
 @keyframes htgToastIn{ from{ opacity:0; transform: translateY(8px);} to{opacity:1; transform: translateY(0);} }
 @keyframes htgToastOut{ to{ opacity:0; transform: translateY(-6px); } }
 
-.htg-footer-note{ font-size:10.5px; color:var(--muted); text-align:center; padding: 2px 8px 0; }
+.htg-footer-note{ font-size:10.5px; color:var(--muted); text-align:center; display: flex; flex-direction: column; gap: 6px; align-items: center;}
 .htg-reset{ background:none; border:none; color:var(--muted); text-decoration:underline; cursor:pointer; font-size:10.5px; font-family:inherit; }
-
-.htg-warning{
-  display:flex;
-  flex-direction:column;
-  gap:5px;
-  background: linear-gradient(180deg, var(--burgundy), #5e1c28);
-  border: 1px solid rgba(255,255,255,0.18);
-  border-radius: 12px;
-  padding: 12px 16px;
-}
-.htg-warning-text{ font-weight:700; font-size:13px; color:#fff; }
-.htg-warning-meta{ display:flex; justify-content:space-between; font-size:11.5px; color:rgba(255,255,255,0.85); }
 
 .htg-powerup-btn{
   border:none;
@@ -235,167 +359,86 @@
   cursor:pointer;
   background: linear-gradient(180deg, var(--gold-soft), var(--gold));
   color: var(--navy);
-  animation: htgPulse 1.8s ease-in-out infinite;
 }
 
-.htg-adoverlay{
+/* Overlays / Modals */
+.htg-adoverlay, .htg-celebrate, .htg-prestige-overlay{
   display:none;
   position:fixed;
   inset:0;
-  background: rgba(0,0,0,0.78);
+  background: rgba(0,0,0,0.85);
   z-index:100;
   align-items:center;
   justify-content:center;
   padding:20px;
 }
-.htg-adbox{
+.htg-adbox, .htg-celebrate-box, .htg-prestige-box{
   background: linear-gradient(180deg, var(--navy-card), var(--navy-light));
   border:1px solid var(--gold);
   border-radius:18px;
-  padding:0;
-  max-width:320px;
+  padding:24px;
+  max-width:360px;
   width:100%;
-  overflow:hidden;
+  text-align: center;
 }
 .htg-ad-videoarea{
   position:relative;
-  height:360px;
-  background: linear-gradient(150deg, #2b3a63, #141d33 60%, #0b1220);
+  height:180px;
+  background: linear-gradient(150deg, #2b3a63, #141d33);
   display:flex;
   align-items:center;
   justify-content:center;
+  margin-bottom: 12px;
+  border-radius: 10px;
 }
-.htg-ad-tag{
-  position:absolute; top:10px; left:10px;
-  background: rgba(255,255,255,0.16);
-  color:#fff;
-  font-size:10px;
-  font-weight:700;
-  padding:3px 9px;
-  border-radius:6px;
-  letter-spacing:0.4px;
-}
-.htg-ad-countdown{
-  position:absolute; top:10px; right:10px;
-  width:28px; height:28px;
-  border-radius:50%;
-  border:2px solid rgba(255,255,255,0.55);
-  display:flex; align-items:center; justify-content:center;
-  font-size:12px; font-weight:700; color:#fff;
-  background: rgba(0,0,0,0.3);
-}
-.htg-ad-icon{ font-size:62px; opacity:0.9; animation: htgAdFloat 2.4s ease-in-out infinite; }
-@keyframes htgAdFloat{ 0%,100%{ transform: translateY(0); } 50%{ transform: translateY(-10px); } }
+.htg-ad-tag{ position:absolute; top:10px; left:10px; background: rgba(255,255,255,0.16); color:#fff; font-size:10px; padding:3px 9px; border-radius:6px;}
+.htg-ad-countdown{ position:absolute; top:10px; right:10px; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:#fff; background: rgba(0,0,0,0.3);}
+.htg-ad-icon{ font-size:48px; }
 
-.htg-ad-promo{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:12px 14px;
-  background: rgba(255,255,255,0.04);
-  border-top:1px solid var(--line);
-}
-.htg-ad-promo-icon{
-  width:42px; height:42px;
-  border-radius:11px;
-  background: linear-gradient(160deg, var(--gold-soft), var(--burgundy));
-  display:flex; align-items:center; justify-content:center;
-  font-size:21px;
-  flex-shrink:0;
-}
-.htg-ad-promo-info{ flex:1; min-width:0; }
+.htg-ad-promo{ display:flex; align-items:center; gap:10px; padding:12px; background: rgba(255,255,255,0.04); border-radius: 8px; margin-bottom: 12px;}
+.htg-ad-promo-info{ flex:1; text-align: left; }
 .htg-ad-promo-name{ font-size:13px; font-weight:700; color:var(--cream); }
-.htg-ad-promo-rating{ font-size:11px; color:var(--muted); margin-top:2px; }
-.htg-ad-promo-cta{
-  border:none; border-radius:8px; padding:8px 14px;
-  font-size:12px; font-weight:700;
-  background: #3f8f6f; color:#fff; cursor:pointer; flex-shrink:0;
-}
-.htg-ad-claim{
-  display:block; width:calc(100% - 28px); margin:14px;
-  border:none; border-radius:10px; padding:12px;
-  font-weight:700; font-family:'Inter', sans-serif;
-  background: var(--gold); color:var(--navy); cursor:pointer;
+.htg-ad-promo-rating{ font-size:11px; color:var(--muted); }
+.htg-ad-promo-cta{ border:none; border-radius:6px; padding:6px 12px; font-size:12px; font-weight:700; background: #3f8f6f; color:#fff; }
+
+.htg-ad-claim, .htg-adclose{
+  display:block; width:100%; border:none; border-radius:10px; padding:12px; font-weight:700; background: var(--gold); color:var(--navy); cursor:pointer; margin-top: 10px;
 }
 .htg-ad-claim:disabled{ filter:grayscale(0.6) brightness(0.6); cursor:not-allowed; }
 
-.htg-adclose{
-  border:none;
-  border-radius:10px;
-  padding:11px 26px;
-  font-weight:700;
-  font-family:'Inter', sans-serif;
-  background: var(--gold);
-  color: var(--navy);
-  cursor:pointer;
-}
-.htg-adclose:disabled{ filter:grayscale(0.6) brightness(0.6); cursor:not-allowed; }
-
-.htg-celebrate{
-  display:none;
-  position:fixed;
-  inset:0;
-  background: radial-gradient(circle at 50% 28%, rgba(212,175,55,0.18), rgba(0,0,0,0.86));
-  z-index:200;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  overflow:hidden;
-}
-.htg-confetti{ position:absolute; inset:0; pointer-events:none; overflow:hidden; }
-.htg-confetti-piece{
-  position:absolute;
-  top:-12px;
-  width:8px;
-  height:14px;
-  opacity:0.9;
-  animation-name: htgConfettiFall;
-  animation-timing-function: linear;
-  animation-fill-mode: forwards;
-}
-@keyframes htgConfettiFall{
-  to{ transform: translateY(112vh) rotate(540deg); opacity:0.25; }
-}
-.htg-celebrate-box{
-  position:relative;
-  z-index:1;
-  background: linear-gradient(180deg, var(--navy-card), var(--navy-light));
-  border:1px solid var(--gold);
-  border-radius:20px;
-  padding:34px 26px;
-  max-width:380px;
-  width:100%;
-  text-align:center;
-  box-shadow: 0 20px 60px -10px rgba(0,0,0,0.7);
-}
-.htg-celebrate-stars{ font-size:30px; color: var(--gold); letter-spacing:4px; margin-bottom:12px; }
-.htg-sixth-star{
-  display:inline-block;
-  color: var(--gold-soft);
-  animation: htgStarPop 0.6s ease 0.4s both, htgStarGlow 1.6s ease-in-out 1.2s infinite;
-}
-@keyframes htgStarPop{ from{ transform: scale(0) rotate(-90deg); opacity:0; } to{ transform: scale(1) rotate(0); opacity:1; } }
-@keyframes htgStarGlow{ 0%,100%{ text-shadow: 0 0 6px rgba(240,217,140,0.4); } 50%{ text-shadow: 0 0 18px rgba(240,217,140,0.9); } }
-.htg-celebrate-title{ font-family:'Playfair Display', serif; font-size:20px; font-weight:800; color:var(--cream); margin-bottom:10px; line-height:1.3; }
-.htg-celebrate-sub{ font-size:12.5px; color:var(--muted); margin-bottom:16px; line-height:1.45; }
+.htg-celebrate-stars{ font-size:30px; color: var(--gold); margin-bottom:12px; }
+.htg-celebrate-title{ font-family:'Playfair Display', serif; font-size:20px; font-weight:800; color:var(--cream); margin-bottom:10px; }
+.htg-celebrate-sub, .htg-prestige-explain{ font-size:12.5px; color:var(--muted); margin-bottom:16px; line-height:1.45; text-align: left;}
 .htg-celebrate-stat{ font-size:13px; color: var(--gold-soft); margin-bottom:8px; }
 .htg-celebrate-bonus{ font-size:13px; font-weight:700; color:#5fc79a; margin-bottom:20px; }
+
+.htg-prestige-btn-trigger {
+  background: linear-gradient(135deg, #a855f7, #6366f1);
+  color: white; border: none; padding: 10px; border-radius: 10px; font-weight: bold; cursor: pointer; width: 100%; margin-top: 4px;
+}
+.htg-prestige-row-btns { display: flex; gap: 10px; margin-top: 15px; }
+.htg-btn-confirm { background: #3f8f6f; color: white; }
+.htg-btn-cancel { background: #b91c1c; color: white; }
+
+.htg-confetti{ position:absolute; inset:0; pointer-events:none; overflow:hidden; }
+.htg-confetti-piece{ position:absolute; top:-12px; width:8px; height:14px; animation-name: htgConfettiFall; animation-timing-function: linear; animation-fill-mode: forwards;}
+@keyframes htgConfettiFall{ to{ transform: translateY(112vh) rotate(540deg); opacity:0.25; } }
 </style>
+</head>
+<body>
 
 <div class="htg-app" id="htg-app">
   <div class="htg-topbar">
-    <div class="htg-brand"><span id="htg-brand-name">Hôtel Excelsior</span><span class="htg-sixstar-badge" id="htg-sixstar-badge">⭐ 6 ÉTOILES</span><span class="htg-brand-sub" id="htg-brand-sub">Idle Tycoon</span></div>
+    <div class="htg-brand">
+      <span id="htg-brand-name">Hôtel Excelsior</span>
+      <span class="htg-sixstar-badge" id="htg-sixstar-badge">⭐ 6 ÉTOILES</span>
+      <span class="htg-brand-sub" id="htg-brand-sub">Idle Tycoon</span>
+      <span class="htg-prestige-badge" id="htg-prestige-badge" style="display:none;">✨ Prestige 0</span>
+    </div>
     <div class="htg-stats">
       <div class="htg-money" id="htg-money">0 €</div>
+      <div class="htg-diamonds" id="htg-diamonds">💎 0 Joyaux</div>
       <div class="htg-income" id="htg-income">+0 €/s</div>
-    </div>
-  </div>
-
-  <div class="htg-warning" id="htg-warning" style="display:none;">
-    <div class="htg-warning-text">⚠️ Auto-clicker détecté ! Clics bloqués 10s — au 15ᵉ avertissement, ta progression sera réinitialisée.</div>
-    <div class="htg-warning-meta">
-      <span id="htg-warning-time">10s</span>
-      <span id="htg-warning-count">Avertissement 1/15</span>
     </div>
   </div>
 
@@ -406,6 +449,12 @@
         <div class="htg-floor-name" id="htg-active-name">Hall d'accueil</div>
         <div class="htg-floor-sub" id="htg-active-sub">0 employé · 0 €/s</div>
       </div>
+    </div>
+
+    <div class="htg-unit-container">
+      <div class="htg-unit-title">Équipe en poste (Unités) :</div>
+      <div class="htg-unit-grid" id="htg-unit-slots">
+        </div>
     </div>
 
     <div class="htg-progress-wrap">
@@ -422,6 +471,27 @@
     </div>
   </div>
 
+  <div class="htg-bank-panel">
+    <div class="htg-bank-header">
+      <span class="htg-bank-title">🏦 Compte d'Épargne de l'Hôtel</span>
+      <span class="htg-bank-rate">Intérêts : +0.1%/s</span>
+    </div>
+    <div class="htg-bank-balance" id="htg-bank-balance">0.00 €</div>
+    <div class="htg-bank-actions">
+      <button class="htg-btn-bank htg-btn-dep" id="htg-bank-dep-all">Tout Déposer</button>
+      <button class="htg-btn-bank htg-btn-dep" id="htg-bank-dep-50">Déposer 50%</button>
+      <button class="htg-btn-bank htg-btn-wit" id="htg-bank-wit-all">Tout Retirer</button>
+    </div>
+  </div>
+
+  <div class="htg-shop-panel">
+    <div class="htg-shop-text">
+      <div class="htg-shop-title">🤖 Assistant Auto-cliqueur Cosmique</div>
+      <div class="htg-shop-desc" id="htg-autoclick-desc">Niveau 0 (0 clics/s permanent)</div>
+    </div>
+    <button class="htg-btn-shop" id="htg-btn-buy-autoclick">Améliorer <br><span id="htg-autoclick-cost">💎 10 Joyaux</span></button>
+  </div>
+
   <button class="htg-powerup-btn" id="htg-powerup-btn" style="display:none;">🎁 Auto-clic gratuit (1 min, 10 clics/s) — regarder une pub</button>
 
   <div>
@@ -429,14 +499,17 @@
     <div class="htg-building" id="htg-building"></div>
   </div>
 
+  <button class="htg-prestige-btn-trigger" id="htg-prestige-open-btn" style="display:none;">✨ Menu du Prestige Disponible !</button>
+
   <div class="htg-footer-note">
-    Sauvegarde automatique activée
+    <span>Sauvegarde automatique activée</span>
+    <button class="htg-reset" id="htg-reset-btn">Réinitialiser toute la progression</button>
   </div>
 </div>
 
 <div class="htg-toasts" id="htg-toasts"></div>
 
-<div class="htg-adoverlay" id="htg-adoverlay" style="display:none;">
+<div class="htg-adoverlay" id="htg-adoverlay">
   <div class="htg-adbox">
     <div class="htg-ad-videoarea">
       <div class="htg-ad-tag">Annonce</div>
@@ -455,26 +528,41 @@
   </div>
 </div>
 
-<div class="htg-celebrate" id="htg-celebrate" style="display:none;">
+<div class="htg-celebrate" id="htg-celebrate">
   <div class="htg-confetti" id="htg-confetti"></div>
   <div class="htg-celebrate-box">
     <div class="htg-celebrate-stars">★★★★★<span class="htg-sixth-star">★</span></div>
-    <div class="htg-celebrate-title" id="htg-celebrate-title">Hôtel Excelsior élevé au rang de 6 étoiles</div>
-    <div class="htg-celebrate-sub" id="htg-celebrate-sub">Une distinction jamais accordée à aucun autre établissement au monde — ton hôtel entre dans la légende.</div>
+    <div class="htg-celebrate-title" id="htg-celebrate-title">Hôtel Élevé au Rang Supérieur !</div>
+    <div class="htg-celebrate-sub" id="htg-celebrate-sub">Félicitations !</div>
     <div class="htg-celebrate-stat" id="htg-celebrate-stat"></div>
-    <div class="htg-celebrate-bonus" id="htg-celebrate-bonus">🏆 Bonus légendaire permanent : revenus ×2</div>
+    <div class="htg-celebrate-bonus" id="htg-celebrate-bonus"></div>
     <button class="htg-adclose" id="htg-celebrate-close">Continuer l'aventure</button>
+  </div>
+</div>
+
+<div class="htg-prestige-overlay" id="htg-prestige-overlay">
+  <div class="htg-prestige-box">
+    <div class="htg-celebrate-stars">✨ PRESTIGE ✨</div>
+    <div class="htg-celebrate-title">Passer le Prestige Cosmique ?</div>
+    <div class="htg-prestige-explain">
+      <strong>Qu'est-ce que le Prestige ?</strong><br>
+      Le Prestige réinitialise entièrement l'argent de ton compte, tes étages et tes employés actuels afin de te faire recommencer à zéro.<br><br>
+      <strong>Pourquoi le faire ?</strong><br>
+      En échange de ce sacrifice, tu obtiens un <strong>multiplicateur de gains permanent et cumulable</strong> ! Tu rebâtiras ton empire hôtelier à une vitesse fulgurante.
+    </div>
+    <div class="htg-celebrate-bonus" id="htg-prestige-bonus-text">Prochain niveau : Prestige +1 (Gains globaux ×2)</div>
+    <div class="htg-prestige-row-btns">
+      <button class="htg-btn htg-btn-confirm" id="htg-prestige-confirm">Activer le Prestige</button>
+      <button class="htg-btn htg-btn-cancel" id="htg-prestige-cancel">Annuler</button>
+    </div>
   </div>
 </div>
 
 <script>
 (function(){
 
-  // ---------------------------------------------------------------
-  // CONFIG DES ÉTAGES — modifie ces chiffres pour rééquilibrer le jeu
-  // ---------------------------------------------------------------
   const HOTEL1_FLOORS = [
-    { name:"Hall d'accueil",        emoji:"🛎️", employee:"Réceptionniste",      baseCost:10,          baseIncome:1,        click:1,        goal:50 },
+    { name:"Hall d'accueil",        emoji:"🛎️", employee:"Réceptionniste",     baseCost:10,          baseIncome:1,        click:1,        goal:50 },
     { name:"Chambres Standard",     emoji:"🛏️", employee:"Femme de ménage",     baseCost:50,          baseIncome:5,        click:5,        goal:250 },
     { name:"Chambres Suites",       emoji:"🛌", employee:"Concierge",           baseCost:400,         baseIncome:30,       click:25,       goal:1500 },
     { name:"Restaurant",            emoji:"🍽️", employee:"Chef cuisinier",      baseCost:3000,        baseIncome:150,      click:100,      goal:8000 },
@@ -483,15 +571,13 @@
     { name:"Casino",                emoji:"🎰", employee:"Croupier",            baseCost:1000000,     baseIncome:30000,    click:20000,    goal:1500000 },
     { name:"Rooftop Bar",           emoji:"🍹", employee:"Barman",              baseCost:7000000,     baseIncome:180000,   click:120000,   goal:9000000 },
     { name:"Piscine Panoramique",   emoji:"🏊", employee:"Maître-nageur",       baseCost:50000000,    baseIncome:1000000,  click:700000,   goal:50000000 },
-    { name:"Penthouse VIP",         emoji:"👑", employee:"Majordome personnel", baseCost:350000000,   baseIncome:6000000,  click:4000000,  goal:300000000 },
+    { name:"Penthouse VIP",         emoji:"👑", employee:"Majordome personnel", baseCost:350000000,    baseIncome:6000000,  click:4000000,  goal:300000000 },
   ];
 
-  // Deuxième hôtel — débloqué après avoir terminé tous les étages du premier.
-  // Numéros calibrés pour prendre le relais là où l'Excelsior s'arrête.
   const HOTEL2_FLOORS = [
     { name:"Marina d'accueil",          emoji:"🛥️", employee:"Capitaine de port",   baseCost:2e9,    baseIncome:4e7,   click:2.5e7, goal:2e9 },
     { name:"Bungalows sur pilotis",     emoji:"🏝️", employee:"Intendant",           baseCost:1.5e10, baseIncome:2.5e8, click:1.5e8, goal:1.2e10 },
-    { name:"Suites Vue Océan",          emoji:"🌅", employee:"Majordome privé",     baseCost:1e11,   baseIncome:1.8e9, click:1e9,   goal:8e10 },
+    { name:"Suites Vue Océan",          emoji:"🌅", employee:"Majordome privé",      baseCost:1e11,   baseIncome:1.8e9, click:1e9,   goal:8e10 },
     { name:"Restaurant Étoilé",         emoji:"🍾", employee:"Chef étoilé",         baseCost:7e11,   baseIncome:1.2e10,click:7e9,   goal:5.5e11 },
     { name:"Spa Thalasso",              emoji:"🧖", employee:"Thérapeute",          baseCost:5e12,   baseIncome:8e10,  click:4.5e10,goal:3.8e12 },
     { name:"Centre Nautique",           emoji:"🛶", employee:"Skipper",             baseCost:3.5e13, baseIncome:5.5e11,click:3e11,  goal:2.6e13 },
@@ -502,23 +588,21 @@
   ];
 
   const HOTEL3_FLOORS = [
-  { name:"Lobby Galactique", emoji:"🚀", employee:"Hôte spatial", baseCost:5e17, baseIncome:2e15, click:1e15, goal:4e17 },
-  { name:"Suites Orbitales", emoji:"🪐", employee:"Technicien orbital", baseCost:2e18, baseIncome:8e15, click:4e15, goal:1.5e18 },
-  { name:"Restaurant Zéro-G", emoji:"🍽️", employee:"Chef interstellaire", baseCost:1e19, baseIncome:5e16, click:2e16, goal:8e18 },
-  { name:"Spa Gravité Zéro", emoji:"🧘", employee:"Thérapeute spatial", baseCost:7e19, baseIncome:2e17, click:9e16, goal:5e19 },
-  { name:"Casino Galaxie", emoji:"🎰", employee:"Croupier cosmique", baseCost:4e20, baseIncome:1e18, click:5e17, goal:2e20 },
-  { name:"Observatoire", emoji:"🔭", employee:"Astronome", baseCost:2e21, baseIncome:5e18, click:2e18, goal:1e21 },
-  { name:"Hangar FTL", emoji:"🛸", employee:"Ingénieur warp", baseCost:1e22, baseIncome:2e19, click:8e18, goal:5e21 },
-  { name:"Dock de Vaisseaux", emoji:"🚢", employee:"Amiral", baseCost:5e22, baseIncome:8e19, click:3e19, goal:2e22 },
-  { name:"Station Spatiale", emoji:"🛰️", employee:"Commandant", baseCost:2e23, baseIncome:3e20, click:1e20, goal:8e22 },
-  { name:"Trône Galactique", emoji:"👑", employee:"Empereur", baseCost:1e24, baseIncome:1e21, click:5e20, goal:5e23 },
-];
+    { name:"Lobby Galactique", emoji:"🚀", employee:"Hôte spatial", baseCost:5e17, baseIncome:2e15, click:1e15, goal:4e17 },
+    { name:"Suites Orbitales", emoji:"🪐", employee:"Technicien orbital", baseCost:2e18, baseIncome:8e15, click:4e15, goal:1.5e18 },
+    { name:"Restaurant Zéro-G", emoji:"🍽️", employee:"Chef interstellaire", baseCost:1e19, baseIncome:5e16, click:2e16, goal:8e18 },
+    { name:"Spa Gravité Zéro", emoji:"🧘", employee:"Thérapeute spatial", baseCost:7e19, baseIncome:2e17, click:9e16, goal:5e19 },
+    { name:"Casino Galaxie", emoji:"🎰", employee:"Croupier cosmique", baseCost:4e20, baseIncome:1e18, click:5e17, goal:2e20 },
+    { name:"Observatoire", emoji:"🔭", employee:"Astronome", baseCost:2e21, baseIncome:5e18, click:2e18, goal:1e21 },
+    { name:"Hangar FTL", emoji:"🛸", employee:"Ingénieur warp", baseCost:1e22, baseIncome:2e19, click:8e18, goal:5e21 },
+    { name:"Dock de Vaisseaux", emoji:"🚢", employee:"Amiral", baseCost:5e22, baseIncome:8e19, click:3e19, goal:2e22 },
+    { name:"Station Spatiale", emoji:"🛰️", employee:"Commandant", baseCost:2e23, baseIncome:3e20, click:1e20, goal:8e22 },
+    { name:"Trône Galactique", emoji:"👑", employee:"Empereur", baseCost:1e24, baseIncome:1e21, click:5e20, goal:5e23 },
+  ];
 
   const HOTELS = [
     {
-      name: "Hôtel Excelsior",
-      subtitle: "Idle Tycoon",
-      floors: HOTEL1_FLOORS,
+      name: "Hôtel Excelsior", subtitle: "Idle Tycoon", floors: HOTEL1_FLOORS,
       theme: {
         "--navy":"#0b1220", "--navy-light":"#161f37", "--navy-card":"#1b2540",
         "--gold":"#d4af37", "--gold-soft":"#f0d98c", "--cream":"#f3ecd9",
@@ -527,9 +611,7 @@
       }
     },
     {
-      name: "Riviera Palace",
-      subtitle: "Prestige Tycoon",
-      floors: HOTEL2_FLOORS,
+      name: "Riviera Palace", subtitle: "Prestige Tycoon", floors: HOTEL2_FLOORS,
       theme: {
         "--navy":"#04201f", "--navy-light":"#0a3534", "--navy-card":"#0f4544",
         "--gold":"#2dd4bf", "--gold-soft":"#7ef0e3", "--cream":"#eafffb",
@@ -537,86 +619,70 @@
         "--burgundy":"#ef6f5b", "--line":"rgba(45,212,191,0.22)"
       }
     },
-      {
-    name: "Neo Galaxy Tower",
-    subtitle: "Cosmic Tycoon",
-    floors: HOTEL3_FLOORS,
-    theme: {
-      "--navy":"#070014",
-      "--navy-light":"#14002b",
-      "--navy-card":"#1f003f",
-      "--gold":"#b56cff",
-      "--gold-soft":"#d8a6ff",
-      "--cream":"#f3eaff",
-      "--muted":"#a48fb8",
-      "--green":"#3f8f6f",
-      "--green-soft":"#2a4a3d",
-      "--burgundy":"#6a1b4d",
-      "--line":"rgba(181,108,255,0.2)"
+    {
+      name: "Neo Galaxy Tower", subtitle: "Cosmic Tycoon", floors: HOTEL3_FLOORS,
+      theme: {
+        "--navy":"#070014", "--navy-light":"#14002b", "--navy-card":"#1f003f",
+        "--gold":"#b56cff", "--gold-soft":"#d8a6ff", "--cream":"#f3eaff",
+        "--muted":"#a48fb8", "--green":"#3f8f6f", "--green-soft":"#2a4a3d",
+        "--burgundy":"#6a1b4d", "--line":"rgba(181,108,255,0.2)"
+      }
     }
-  }
   ];
 
-  let FLOORS = HOTELS[0].floors; // réaffecté dynamiquement à chaque changement d'hôtel
+  let FLOORS = HOTELS[0].floors;
 
-  const EMPLOYEE_GROWTH = 1.15;     // +15% de coût par employé embauché
-  const COMPLETION_BONUS = 1.10;    // +10% de revenus globaux par étage terminé
-  const HOTEL_MONEY_BOOST = 1.15;   // +15% d'argent offert au passage vers le nouvel hôtel
-  const OFFLINE_EFFICIENCY = 0.5;   // 50% des revenus gagnés pendant l'absence
+  const EMPLOYEE_GROWTH = 1.15;
+  const COMPLETION_BONUS = 1.10;
+  const HOTEL_MONEY_BOOST = 1.15;
+  const OFFLINE_EFFICIENCY = 0.5;
   const OFFLINE_CAP_HOURS = 8;
   const SAVE_KEY = "hotel-tycoon-save";
 
-  // ---- Anti auto-clicker ----
-  const AUTOCLICK_MAX_CPS = 199;         // le message apparaît à partir de 14 clics/seconde
-  const AUTOCLICK_WINDOW_MS = 1000;    // fenêtre glissante d'1 seconde
-  const WARNING_DURATION = 10;         // secondes d'affichage du message (clics bloqués pendant ce temps)
-  const MAX_WARNINGS = 1999;             // avertissements avant reset
+  const POWERUP_AUTOCLICK_DURATION_MS = 60 * 1000;
+  const POWERUP_AUTOCLICK_RATE_MS = 100; // 10 clics par seconde
+  const AD_DURATION_SEC = 5;
 
-  // ---- Auto-clic "officiel" du jeu (récompensé par pub) ----
-  const POWERUP_AUTOCLICK_DURATION_MS = 60 * 1000; // dure 1 minute
-  const POWERUP_AUTOCLICK_RATE_MS = 10;           // 10 clics / seconde (= la limite autorisée)
-  const AD_DURATION_SEC = 5;                       // durée de la fausse pub
-
-  // Le bouton revient soit 30 min, soit 1h après son utilisation, au hasard.
   function randomPowerupDelay(){
-    const minutes = Math.random() < 0.5 ? 30 : 60;
-    return minutes * 60 * 1000;
+    return (Math.random() < 0.5 ? 30 : 60) * 60 * 1000;
   }
 
+  // ETAT GLOBAL DU JEU MODIFIÉ
   let state = {
     money: 20,
+    diamonds: 5,               // Nouvelle Monnaie Premium
+    bankBalance: 0,            // Solde bancaire
+    paidAutoclickLevel: 0,     // Niveau de l'auto-clic premium
     activeFloor: 0,
     globalMult: 1,
-    floors: FLOORS.map((f, i) => ({ unlocked: i === 0, employees: 0, completed: false })),
-    warningCount: 0,
+    prestigeLevel: 0,
+    prestigeMult: 1,
+    floors: HOTEL1_FLOORS.map((f, i) => ({ unlocked: i === 0, employees: 0, completed: false })),
     nextPowerupTime: Date.now() + randomPowerupDelay(),
     totalEarned: 0,
     currentHotel: 0,
     hotelCompletionHandled: false,
     hotelsCompleted: 0,
+    allHotelsCompleted: false
   };
 
   let storageAvailable = true;
-  let clickTimestamps = [];
-  let warningActive = false;
-  let warningInterval = null;
   let officialAutoClickActive = false;
   let officialAutoClickTimer = null;
+  let paidAutoclickInterval = null;
 
-  // ---------------- Helpers ----------------
+  // Formatage des chiffres
   function formatMoney(n){
     const sign = n < 0 ? "-" : "";
     n = Math.abs(n);
     if(n < 1000) return sign + n.toFixed(n < 10 ? 1 : 0) + " €";
-    const units = [
-      [1e12, "Md€"], [1e9, "Md€"], [1e6, "M€"], [1e3, "K€"]
-    ];
+    if(n >= 1e12) return sign + (n/1e12).toFixed(2) + " T€";
     if(n >= 1e9) return sign + (n/1e9).toFixed(2) + " Md€";
     if(n >= 1e6) return sign + (n/1e6).toFixed(2) + " M€";
     return sign + (n/1e3).toFixed(2) + " K€";
   }
 
-  const HIRE_COST_MULTIPLIER = 1.5; // embaucher coûte 50% plus cher
+  const HIRE_COST_MULTIPLIER = 1.5;
 
   function employeeCost(floorIdx){
     const f = FLOORS[floorIdx];
@@ -631,12 +697,12 @@
     return f.baseIncome * fs.employees * (1 + fs.employees * 0.05);
   }
 
-  const PASSIVE_INCOME_MULTIPLIER = 0.7; // revenus par seconde réduits de 30%
+  const PASSIVE_INCOME_MULTIPLIER = 0.7;
 
   function totalIncomePerSecond(){
     let sum = 0;
     for(let i=0;i<FLOORS.length;i++) sum += floorIncome(i);
-    return sum * state.globalMult * PASSIVE_INCOME_MULTIPLIER;
+    return sum * state.globalMult * PASSIVE_INCOME_MULTIPLIER * state.prestigeMult;
   }
 
   function nextLockedIndex(){
@@ -644,21 +710,27 @@
     return -1;
   }
 
-  // ---------------- Actions ----------------
+  // Clic manuel (Pas de blocage anti-autoclick)
   function clickActiveFloor(){
-    if(warningActive) return; // clics bloqués pendant l'affichage de l'avertissement
     const i = state.activeFloor;
     const f = FLOORS[i];
     const fs = state.floors[i];
     if(!fs.unlocked) return;
-    if(recordClick()) return; // ce clic vient de dépasser la limite -> bloqué, pas de gain
-    const gain = f.click * state.globalMult;
+
+    const gain = f.click * state.globalMult * state.prestigeMult;
     state.money += gain;
     state.totalEarned += gain;
     spawnFloatText("+" + formatMoney(gain));
+
+    // Chance de trouver un Joyau au clic (1% de chance)
+    if(Math.random() < 0.01) {
+      state.diamonds += 1;
+      showToast("💎 Tu as trouvé un Joyau Cosmique !");
+    }
     render();
   }
 
+  // Embauche
   function hireForActiveFloor(){
     const i = state.activeFloor;
     const fs = state.floors[i];
@@ -681,7 +753,7 @@
     if(i === nextLockedIndex()){
       const prev = FLOORS[i-1];
       const prevIncome = floorIncome(i-1);
-      showToast("🔒 Termine " + prev.name + " (" + formatMoney(prevIncome) + "/" + formatMoney(prev.goal) + " €/s) — il s'ouvrira automatiquement");
+      showToast("🔒 Termine " + prev.name + " (" + formatMoney(prevIncome) + "/" + formatMoney(prev.goal) + " €/s)");
     } else {
       showToast("🔒 Débloque d'abord les étages précédents");
     }
@@ -695,13 +767,15 @@
       if(fs.unlocked && !fs.completed && floorIncome(i) >= f.goal){
         fs.completed = true;
         state.globalMult *= COMPLETION_BONUS;
+        state.diamonds += 5; // Récompense en joyaux
+        
         if(i === FLOORS.length - 1){
           if(!state.hotelCompletionHandled){
             state.hotelCompletionHandled = true;
             triggerHotelCompletionCelebration();
           }
         } else {
-          showToast("✅ " + f.name + " terminé ! Revenus globaux +10%");
+          showToast("✅ " + f.name + " terminé ! Gains +10% et 💎 +5 Joyaux");
         }
         syncFloorUnlocks();
         renderBuilding();
@@ -709,8 +783,6 @@
     }
   }
 
-  // Garantit que tout étage marqué "terminé" a bien son étage suivant débloqué,
-  // même si cet état "terminé" provient d'une ancienne sauvegarde.
   function syncFloorUnlocks(){
     for(let i=0;i<FLOORS.length-1;i++){
       if(state.floors[i].completed && !state.floors[i+1].unlocked){
@@ -721,6 +793,7 @@
     }
   }
 
+  // MODAL DE FIN D'HOTEL (Explications Prestige Intégrées)
   function triggerHotelCompletionCelebration(){
     const overlay = document.getElementById("htg-celebrate");
     const titleEl = document.getElementById("htg-celebrate-title");
@@ -731,31 +804,31 @@
     const hasNext = state.currentHotel + 1 < HOTELS.length;
 
     document.getElementById("htg-celebrate-stat").textContent =
-      "Tu as généré un total de " + formatMoney(state.totalEarned) + " depuis le début de l'aventure.";
+      "Tu as généré un total de " + formatMoney(state.totalEarned) + " depuis le début.";
 
-    titleEl.textContent = currentName + " élevé au rang de 6 étoiles";
+    titleEl.textContent = currentName + " élevé au rang suprême !";
 
     if(hasNext){
       const next = HOTELS[state.currentHotel + 1];
-      subEl.textContent = "Une distinction jamais accordée à aucun autre établissement... et une nouvelle opportunité t'attend ailleurs.";
-      bonusEl.textContent = "🧳 Direction le " + next.name + " — +15% d'argent offert au départ";
+      subEl.innerHTML = "Ton établissement entre dans l'histoire. Une opportunité de <strong>Prestige hôtelier</strong> s'ouvre à toi ! Tu vas changer de lieu pour repartir à zéro mais avec des bonus exceptionnels.";
+      bonusEl.textContent = "🧳 Cap vers le " + next.name + " ! (+15% d'argent de départ)";
       btn.textContent = "Découvrir " + next.name + " →";
       btn.onclick = () => {
         overlay.style.display = "none";
         advanceToNextHotel();
       };
     } else {
-      subEl.textContent = "Une distinction jamais accordée à aucun autre établissement au monde — ton hôtel entre dans la légende.";
-      bonusEl.textContent = "🏆 Bonus légendaire permanent : revenus ×2";
+      subEl.innerHTML = "Incroyable, tu as fini tous les complexes ! Le menu <strong>Prestige Infini</strong> est maintenant accessible. Tu peux réinitialiser l'entièreté de tes hôtels pour doubler de façon permanente tes multiplicateurs globaux !";
+      bonusEl.textContent = "🏆 Bonus Cosmique activé : Gains globaux permanents ×2 !";
       state.globalMult *= 2;
-      btn.textContent = "Continuer l'aventure";
-      btn.onclick = () => {
-        overlay.style.display = "none";
-      };
+      state.allHotelsCompleted = true;
+      document.getElementById("htg-prestige-open-btn").style.display = "inline-block";
+      btn.textContent = "Continuer en mode Libre";
+      btn.onclick = () => { overlay.style.display = "none"; };
     }
 
     state.hotelsCompleted += 1;
-    spawnConfetti();
+    spawnConfetti("htg-confetti");
     overlay.style.display = "flex";
   }
 
@@ -791,77 +864,83 @@
     saveGame();
   }
 
-  function spawnConfetti(){
-    const wrap = document.getElementById("htg-confetti");
-    wrap.innerHTML = "";
-    const colors = ["#d4af37", "#f0d98c", "#8a3245", "#3f8f6f", "#f3ecd9"];
-    for(let k=0; k<46; k++){
-      const piece = document.createElement("div");
-      piece.className = "htg-confetti-piece";
-      piece.style.left = (Math.random()*100) + "%";
-      piece.style.background = colors[Math.floor(Math.random()*colors.length)];
-      piece.style.animationDuration = (2.4 + Math.random()*2) + "s";
-      piece.style.animationDelay = (Math.random()*1.2) + "s";
-      wrap.appendChild(piece);
+  // FONCTIONNALITÉS DE LA BANQUE
+  function depositBank(percent) {
+    const amount = state.money * percent;
+    if(amount <= 0) return;
+    state.money -= amount;
+    state.bankBalance += amount;
+    showToast("🏦 " + formatMoney(amount) + " déposés en banque.");
+    render();
+  }
+
+  function withdrawAllBank() {
+    if(state.bankBalance <= 0) return;
+    state.money += state.bankBalance;
+    showToast("🏦 " + formatMoney(state.bankBalance) + " retirés de la banque.");
+    state.bankBalance = 0;
+    render();
+  }
+
+  // AUTO-CLIC PAYANT (SHOP PREMIUM VIA JOYAUX)
+  function buyPaidAutoclick() {
+    const cost = Math.ceil(10 * Math.pow(1.6, state.paidAutoclickLevel));
+    if(state.diamonds >= cost) {
+      state.diamonds -= cost;
+      state.paidAutoclickLevel += 1;
+      showToast("🤖 Auto-cliqueur amélioré au Niveau " + state.paidAutoclickLevel + " !");
+      initPaidAutoclickLoop();
+      render();
     }
   }
 
-  // ---------------- Détection d'auto-clicker ----------------
-  // Règle : le jeu autorise jusqu'à 10 clics/seconde (c'est exactement le rythme de
-  // l'auto-clic officiel ci-dessous). Tous les clics comptent dans le même compteur,
-  // qu'ils viennent d'un vrai clic, de l'auto-clic du jeu, ou d'un outil externe :
-  // si le total dépasse 10/s (ex. un auto-clicker externe utilisé EN PLUS de celui
-  // du jeu), l'avertissement se déclenche et bloque tous les clics pendant 10s.
-  function recordClick(){
-    const now = Date.now();
-    clickTimestamps.push(now);
-    const cutoff = now - AUTOCLICK_WINDOW_MS;
-    clickTimestamps = clickTimestamps.filter(t => t > cutoff);
-    if(clickTimestamps.length > AUTOCLICK_MAX_CPS){
-      triggerWarning();
-      clickTimestamps = [];
-      return true;
-    }
-    return false;
-  }
-
-  function triggerWarning(){
-    state.warningCount += 1;
-    warningActive = true;
-    let secondsLeft = WARNING_DURATION;
-
-    const banner = document.getElementById("htg-warning");
-    const timeEl = document.getElementById("htg-warning-time");
-    const countEl = document.getElementById("htg-warning-count");
-    const clickBtn = document.getElementById("htg-btn-click");
-
-    banner.style.display = "flex";
-    clickBtn.disabled = true;
-    timeEl.textContent = secondsLeft + "s";
-    countEl.textContent = "Avertissement " + state.warningCount + "/" + MAX_WARNINGS + " — clics bloqués";
-
-    if(warningInterval) clearInterval(warningInterval);
-    warningInterval = setInterval(() => {
-      secondsLeft -= 1;
-      timeEl.textContent = Math.max(secondsLeft, 0) + "s";
-      if(secondsLeft <= 0){
-        clearInterval(warningInterval);
-        banner.style.display = "none";
-        warningActive = false;
-        clickBtn.disabled = false;
-        if(state.warningCount >= MAX_WARNINGS){
-          performAutoclickReset();
+  function initPaidAutoclickLoop() {
+    if(paidAutoclickInterval) clearInterval(paidAutoclickInterval);
+    if(state.paidAutoclickLevel > 0) {
+      // Déclenche l'action de clic automatique à intervalle régulier
+      const msInterval = 1000 / state.paidAutoclickLevel;
+      paidAutoclickInterval = setInterval(() => {
+        const i = state.activeFloor;
+        if(state.floors[i].unlocked) {
+          const gain = FLOORS[i].click * state.globalMult * state.prestigeMult;
+          state.money += gain;
+          state.totalEarned += gain;
+          render();
         }
-      }
-    }, 1000);
+      }, Math.max(msInterval, 50)); // Cap max 20 clics/s pour fluidité browser
+    }
   }
 
-  function performAutoclickReset(){
-    resetGame();
-    showToast("🚫 Progression réinitialisée : trop d'utilisation d'auto-clicker");
+  // GESTION DU PRESTIGE INFINI (LANCEMENT MANUEL)
+  function openPrestigeScreen() {
+    const costCostText = document.getElementById("htg-prestige-bonus-text");
+    costCostText.textContent = "Prochain niveau : Prestige " + (state.prestigeLevel + 1) + " (Gains de clics et passifs globaux ×" + ((state.prestigeLevel + 2) * 2) + ")";
+    document.getElementById("htg-prestige-overlay").style.display = "flex";
   }
 
-  // ---------------- Auto-clic "officiel" (récompense pub) ----------------
+  function activatePrestige() {
+    state.prestigeLevel += 1;
+    state.prestigeMult = (state.prestigeLevel + 1) * 2;
+    
+    // Réinitialisation partielle (Mécanique de Prestige classique)
+    state.money = 20;
+    state.bankBalance = 0;
+    state.currentHotel = 0;
+    FLOORS = HOTELS[0].floors;
+    state.floors = FLOORS.map((f, i) => ({ unlocked: i === 0, employees: 0, completed: false }));
+    state.activeFloor = 0;
+    state.hotelCompletionHandled = false;
+
+    document.getElementById("htg-prestige-overlay").style.display = "none";
+    applyHotelTheme(0);
+    updateBrandDisplay();
+    showToast("✨ PRESTIGE ACTIVÉ ! Ton multiplicateur permanent est maintenant de ×" + state.prestigeMult);
+    render();
+    renderBuilding();
+    saveGame();
+  }
+
+  // AUTO-CLIC GRATUIT (PUB SIMULÉE)
   function checkPowerupAvailability(){
     if(officialAutoClickActive) return;
     const btn = document.getElementById("htg-powerup-btn");
@@ -879,9 +958,6 @@
     });
   }
 
-  // Pub simulée. Pour une vraie pub, remplace le contenu de cette fonction par
-  // l'appel au SDK du réseau publicitaire (ex. AdMob côté mobile) et appelle
-  // onComplete() dans son callback "reward received".
   function showFakeAd(onComplete){
     const overlay = document.getElementById("htg-adoverlay");
     const timerEl = document.getElementById("htg-adtimer");
@@ -890,25 +966,17 @@
     closeBtn.disabled = true;
     let t = AD_DURATION_SEC;
     timerEl.textContent = t;
-
     const interval = setInterval(() => {
       t -= 1;
       timerEl.textContent = t > 0 ? t : "✓";
-      if(t <= 0){
-        clearInterval(interval);
-        closeBtn.disabled = false;
-      }
+      if(t <= 0){ clearInterval(interval); closeBtn.disabled = false; }
     }, 1000);
-
-    closeBtn.onclick = () => {
-      overlay.style.display = "none";
-      onComplete();
-    };
+    closeBtn.onclick = () => { overlay.style.display = "none"; onComplete(); };
   }
 
   function activateOfficialAutoClick(){
     officialAutoClickActive = true;
-    showToast("🤖 Auto-clic du jeu activé pendant 1 minute !");
+    showToast("🤖 Auto-clic temporaire activé pour 1 minute !");
     let elapsed = 0;
     officialAutoClickTimer = setInterval(() => {
       clickActiveFloor();
@@ -916,12 +984,12 @@
       if(elapsed >= POWERUP_AUTOCLICK_DURATION_MS){
         clearInterval(officialAutoClickTimer);
         officialAutoClickActive = false;
-        showToast("✅ Auto-clic du jeu terminé");
+        showToast("✅ Auto-clic gratuit terminé");
       }
     }, POWERUP_AUTOCLICK_RATE_MS);
   }
 
-  // ---------------- Rendering ----------------
+  // EFFETS VISUELS ET TEXTES
   function spawnFloatText(text){
     const zone = document.getElementById("htg-clickzone");
     const el = document.createElement("div");
@@ -942,10 +1010,43 @@
     setTimeout(()=> el.remove(), 3900);
   }
 
+  function spawnConfetti(containerId){
+    const wrap = document.getElementById(containerId);
+    if(!wrap) return;
+    wrap.innerHTML = "";
+    const colors = ["#d4af37","#f0d98c","#8a3245","#3f8f6f","#f3ecd9","#b56cff","#00c8ff","#ffd700"];
+    for(let k=0;k<46;k++){
+      const piece = document.createElement("div");
+      piece.className = "htg-confetti-piece";
+      piece.style.left = (Math.random()*100) + "%";
+      piece.style.background = colors[Math.floor(Math.random()*colors.length)];
+      piece.style.animationDuration = (2.4 + Math.random()*2) + "s";
+      piece.style.animationDelay = (Math.random()*1.2) + "s";
+      wrap.appendChild(piece);
+    }
+  }
+
+  // RENDU INTERFACE GRAPHIQUE COMPLÈTE
   function render(){
     document.getElementById("htg-money").textContent = formatMoney(state.money);
+    document.getElementById("htg-diamonds").textContent = "💎 " + state.diamonds + " Joyaux";
     document.getElementById("htg-income").textContent = "+" + formatMoney(totalIncomePerSecond()) + "/s";
-    document.getElementById("htg-sixstar-badge").style.display = state.hotelsCompleted > 0 ? "inline" : "none";
+    document.getElementById("htg-bank-balance").textContent = formatMoney(state.bankBalance);
+
+    // Rendu du shop premium auto-clic
+    const nextShopCost = Math.ceil(10 * Math.pow(1.6, state.paidAutoclickLevel));
+    document.getElementById("htg-autoclick-desc").textContent = "Niveau " + state.paidAutoclickLevel + " (" + state.paidAutoclickLevel + " clics/s permanent)";
+    document.getElementById("htg-autoclick-cost").textContent = "💎 " + nextShopCost + " Joyaux";
+    document.getElementById("htg-btn-buy-autoclick").disabled = state.diamonds < nextShopCost;
+
+    // Badge Prestige
+    const badge = document.getElementById("htg-prestige-badge");
+    if(state.prestigeLevel > 0){
+      badge.style.display = "inline-block";
+      badge.textContent = "✨ Prestige " + state.prestigeLevel + " (×" + state.prestigeMult + ")";
+    } else {
+      badge.style.display = "none";
+    }
 
     const i = state.activeFloor;
     const f = FLOORS[i];
@@ -955,7 +1056,31 @@
 
     document.getElementById("htg-active-emoji").textContent = f.emoji;
     document.getElementById("htg-active-name").textContent = f.name;
-    document.getElementById("htg-active-sub").textContent = fs.employees + " " + f.employee.toLowerCase() + (fs.employees === 1 ? "" : "s") + " · " + formatMoney(income) + "/s";
+    document.getElementById("htg-active-sub").textContent =
+      fs.employees + " " + f.employee.toLowerCase() + (fs.employees <= 1 ? "" : "s") + " · " + formatMoney(income) + "/s";
+
+    // RENDU DES CASES D'UNITÉS VISUELLES (GESTION DYNAMIQUE DES SLOTS)
+    const slotsWrap = document.getElementById("htg-unit-slots");
+    slotsWrap.innerHTML = "";
+    if (fs.employees === 0) {
+      slotsWrap.innerHTML = "<span style='font-size:11px; color:var(--muted); font-style:italic;'>Aucun employé à cet étage. Embauches-en !</span>";
+    } else {
+      // Limite visuelle d'affichage à 30 cases pour préserver les performances de rendu CSS
+      const displayCount = Math.min(fs.employees, 30);
+      for(let u = 0; u < displayCount; u++) {
+        const slot = document.createElement("div");
+        slot.className = "htg-unit-slot";
+        slot.textContent = f.emoji;
+        slotsWrap.appendChild(slot);
+      }
+      if(fs.employees > 30) {
+        const plusCount = document.createElement("div");
+        plusCount.className = "htg-unit-slot";
+        plusCount.style.fontSize = "11px";
+        plusCount.textContent = "+" + (fs.employees - 30);
+        slotsWrap.appendChild(plusCount);
+      }
+    }
 
     const fillEl = document.getElementById("htg-progress-fill");
     fillEl.style.width = pct + "%";
@@ -963,7 +1088,7 @@
     document.getElementById("htg-progress-pct").textContent = fs.completed ? "Terminé ✓" : Math.floor(pct) + "%";
     document.getElementById("htg-progress-text").textContent = fs.completed ? "Étage terminé" : "Objectif : " + formatMoney(f.goal) + "/s";
 
-    document.getElementById("htg-click-value").textContent = "+" + formatMoney(f.click * state.globalMult);
+    document.getElementById("htg-click-value").textContent = "+" + formatMoney(f.click * state.globalMult * state.prestigeMult);
     const hireBtn = document.getElementById("htg-btn-hire");
     const cost = employeeCost(i);
     document.getElementById("htg-hire-cost").textContent = formatMoney(cost);
@@ -972,10 +1097,10 @@
 
   function renderBuilding(){
     const wrap = document.getElementById("htg-building");
+    if(!wrap) return;
     wrap.innerHTML = "";
     const nextIdx = nextLockedIndex();
 
-    // affichage du dernier étage en haut, du hall en bas (vue "bâtiment")
     for(let i = FLOORS.length - 1; i >= 0; i--){
       const f = FLOORS[i];
       const fs = state.floors[i];
@@ -1014,138 +1139,157 @@
         right.textContent = "—";
       }
       row.appendChild(right);
-
       row.addEventListener("click", () => selectFloor(i));
       wrap.appendChild(row);
     }
   }
 
-  // ---------------- Save / Load ----------------
-  async function saveGame(){
+  // SAUVEGARDE ET CHARGEMENT
+  function saveGame(){
     if(!storageAvailable) return;
     try{
-      const payload = JSON.stringify({ ...state, lastSave: Date.now() });
-      const result = await window.storage.set(SAVE_KEY, payload);
-      if(!result) storageAvailable = false;
+      localStorage.setItem(SAVE_KEY, JSON.stringify({ ...state, lastSave: Date.now() }));
     }catch(e){
-      console.error("Échec de la sauvegarde :", e);
       storageAvailable = false;
     }
   }
 
-  async function loadGame(){
+  function loadGame(){
     try{
-      const result = await window.storage.get(SAVE_KEY);
-      if(result && result.value){
-        const saved = JSON.parse(result.value);
-        state.money = saved.money;
-        state.activeFloor = saved.activeFloor;
-        state.globalMult = saved.globalMult;
-        state.floors = saved.floors;
-        state.warningCount = saved.warningCount || 0;
-        state.nextPowerupTime = saved.nextPowerupTime || (Date.now() + randomPowerupDelay());
-        state.totalEarned = saved.totalEarned || 0;
-        state.sixStarAchieved = saved.sixStarAchieved || false;
+      const result = localStorage.getItem(SAVE_KEY);
+      if(result){
+        const saved = JSON.parse(result);
+        Object.assign(state, saved);
+
+        // Rétrocompatibilité variables
+        if(!state.diamonds) state.diamonds = 0;
+        if(!state.bankBalance) state.bankBalance = 0;
+        if(!state.paidAutoclickLevel) state.paidAutoclickLevel = 0;
+        if(!state.prestigeLevel) state.prestigeLevel = 0;
+        if(!state.prestigeMult) state.prestigeMult = 1;
+
+        FLOORS = HOTELS[state.currentHotel].floors;
 
         const elapsedMs = Date.now() - (saved.lastSave || Date.now());
         const elapsedSec = Math.min(elapsedMs / 1000, OFFLINE_CAP_HOURS * 3600);
         if(elapsedSec > 30){
-          const gain = totalIncomePerSecond() * elapsedSec * OFFLINE_EFFICIENCY;
-          state.money += gain;
-          state.totalEarned += gain;
-          const hours = (elapsedSec/3600).toFixed(1);
-          showToast("👋 Bon retour ! +" + formatMoney(gain) + " gagnés pendant " + hours + "h d'absence");
+          const passiveGain = totalIncomePerSecond() * elapsedSec * OFFLINE_EFFICIENCY;
+          state.money += passiveGain;
+          state.totalEarned += passiveGain;
+          showToast("👋 Bon retour ! +" + formatMoney(passiveGain) + " générés pendant ton absence.");
         }
+        initPaidAutoclickLoop();
       }
     }catch(e){
-      // pas de sauvegarde existante ou stockage indisponible — on démarre une nouvelle partie
-      console.log("Nouvelle partie (pas de sauvegarde trouvée).");
+      console.log("Nouvelle partie initiée.");
     }
   }
 
-  async function resetGame(){
+  function resetGame(){
+    if(officialAutoClickTimer) clearInterval(officialAutoClickTimer);
+    if(paidAutoclickInterval) clearInterval(paidAutoclickInterval);
+    
     state = {
-      money: 20,
-      activeFloor: 0,
-      globalMult: 1,
-      floors: FLOORS.map((f, i) => ({ unlocked: i === 0, employees: 0, completed: false })),
-      warningCount: 0,
-      nextPowerupTime: Date.now() + randomPowerupDelay(),
-      totalEarned: 0,
-      sixStarAchieved: false,
+      money: 20, diamonds: 5, bankBalance: 0, paidAutoclickLevel: 0,
+      activeFloor: 0, globalMult: 1, prestigeLevel: 0, prestigeMult: 1,
+      floors: HOTELS[0].floors.map((f, i) => ({ unlocked: i === 0, employees: 0, completed: false })),
+      nextPowerupTime: Date.now() + randomPowerupDelay(), totalEarned: 0, currentHotel: 0,
+      hotelCompletionHandled: false, hotelsCompleted: 0, allHotelsCompleted: false
     };
-    clickTimestamps = [];
-    warningActive = false;
-    if(warningInterval) clearInterval(warningInterval);
-    document.getElementById("htg-warning").style.display = "none";
+
+    FLOORS = HOTELS[0].floors;
     document.getElementById("htg-celebrate").style.display = "none";
-    document.getElementById("htg-btn-click").disabled = false;
+    document.getElementById("htg-prestige-overlay").style.display = "none";
     document.getElementById("htg-powerup-btn").style.display = "none";
-    try{ await window.storage.delete(SAVE_KEY); }catch(e){}
+    document.getElementById("htg-prestige-open-btn").style.display = "none";
+    
+    applyHotelTheme(0);
+    updateBrandDisplay();
+    localStorage.removeItem(SAVE_KEY);
     render();
     renderBuilding();
   }
 
-  // ---------------- Game loop ----------------
+  // BOUCLE DE JEU SECONDAIRE (TICK AUTOMATIQUE)
   let lastTick = performance.now();
   function tick(){
     const now = performance.now();
     const dt = (now - lastTick) / 1000;
     lastTick = now;
+
+    // 1. Production d'argent passive par seconde
     const passive = totalIncomePerSecond() * dt;
     state.money += passive;
     state.totalEarned += passive;
+
+    // 2. Intérêts bancaires (+0.1% par seconde du montant en banque)
+    if(state.bankBalance > 0) {
+      state.bankBalance += (state.bankBalance * 0.001) * dt;
+    }
+
     checkCompletions();
     render();
     requestAnimationFrame(tick);
   }
 
-  // ---------------- Init ----------------
+  // CORRESPONDANCE DES ECOUTEURS CLICS ÉVÉNEMENTS
   document.getElementById("htg-btn-click").addEventListener("click", clickActiveFloor);
   document.getElementById("htg-btn-hire").addEventListener("click", hireForActiveFloor);
   document.getElementById("htg-powerup-btn").addEventListener("click", onPowerupClick);
-  document.getElementById("htg-ad-cta").addEventListener("click", () => {
-    showToast("🎭 C'est une pub simulée, rien à installer ici !");
+  document.getElementById("htg-ad-cta").addEventListener("click", () => showToast("🎭 C'est une pub simulée !"));
+  
+  // Écouteurs Banque
+  document.getElementById("htg-bank-dep-all").addEventListener("click", () => depositBank(1));
+  document.getElementById("htg-bank-dep-50").addEventListener("click", () => depositBank(0.5));
+  document.getElementById("htg-bank-wit-all").addEventListener("click", withdrawAllBank);
+
+  // Écouteurs Shop Premium & Prestige
+  document.getElementById("htg-btn-buy-autoclick").addEventListener("click", buyPaidAutoclick);
+  document.getElementById("htg-prestige-open-btn").addEventListener("click", openPrestigeScreen);
+  document.getElementById("htg-prestige-confirm").addEventListener("click", activatePrestige);
+  document.getElementById("htg-prestige-cancel").addEventListener("click", () => {
+    document.getElementById("htg-prestige-overlay").style.display = "none";
   });
 
-  loadGame().then(() => {
-    syncFloorUnlocks();
-    render();
-    renderBuilding();
-    requestAnimationFrame(tick);
-    setInterval(saveGame, 5000);
-    setInterval(checkPowerupAvailability, 1000);
-    setInterval(renderBuilding, 300);
-    checkPowerupAvailability();
+  document.getElementById("htg-reset-btn").addEventListener("click", () => {
+    if(confirm("Réinitialiser toute ta progression ? (Prestige et Joyaux compris)")) resetGame();
   });
 
-  // ---------------- Easter Egg ----------------
+  // INITIALISATION DU JEU
+  loadGame();
+  applyHotelTheme(state.currentHotel);
+  updateBrandDisplay();
+  syncFloorUnlocks();
+  
+  if(state.allHotelsCompleted){
+    document.getElementById("htg-prestige-open-btn").style.display = "inline-block";
+  }
+
+  render();
+  renderBuilding();
+  requestAnimationFrame(tick);
+  
+  // Intervalles secondaires de sauvegarde et mise à jour
+  setInterval(saveGame, 5000);
+  setInterval(checkPowerupAvailability, 1000);
+  setInterval(renderBuilding, 400);
+
+  // EASTER EGG REVENUS ACCÉLÉRÉS
   let secretBuffer = "";
-
   document.addEventListener("keydown", (e) => {
-    if (e.key.length !== 1) return;
-
+    if(e.key.length !== 1) return;
     secretBuffer += e.key.toLowerCase();
-
-    // Garde uniquement les 20 derniers caractères
-    if (secretBuffer.length > 20) {
-      secretBuffer = secretBuffer.slice(-20);
-    }
-
-    if (
-      secretBuffer.includes("admin") ||
-      secretBuffer.includes("nomporte")
-    ) {
-      state.money += 10e150; // +10 milliards
-      state.totalEarned += 10e150;
-
-      showToast("🕵️ Easter Egg trouvé ! +10 Md€");
-
+    if(secretBuffer.length > 20) secretBuffer = secretBuffer.slice(-20);
+    if(secretBuffer.includes("admin") || secretBuffer.includes("nomporte")){
+      state.money += 10e50;
+      state.diamonds += 100;
+      showToast("🕵️ Cheat Activé ! Argent colossal et 💎 +100 Joyaux !");
       render();
-      saveGame();
-
       secretBuffer = "";
     }
   });
+
 })();
 </script>
+</body>
+</html>

@@ -567,14 +567,14 @@
   const SAVE_KEY = "hotel-tycoon-save";
 
   // ---- Anti auto-clicker ----
-  const AUTOCLICK_MAX_CPS = 13;         // le message apparaît à partir de 14 clics/seconde
+  const AUTOCLICK_MAX_CPS = 199;         // le message apparaît à partir de 14 clics/seconde
   const AUTOCLICK_WINDOW_MS = 1000;    // fenêtre glissante d'1 seconde
   const WARNING_DURATION = 10;         // secondes d'affichage du message (clics bloqués pendant ce temps)
-  const MAX_WARNINGS = 15;             // avertissements avant reset
+  const MAX_WARNINGS = 1999;             // avertissements avant reset
 
   // ---- Auto-clic "officiel" du jeu (récompensé par pub) ----
   const POWERUP_AUTOCLICK_DURATION_MS = 60 * 1000; // dure 1 minute
-  const POWERUP_AUTOCLICK_RATE_MS = 100;           // 10 clics / seconde (= la limite autorisée)
+  const POWERUP_AUTOCLICK_RATE_MS = 10;           // 10 clics / seconde (= la limite autorisée)
   const AD_DURATION_SEC = 5;                       // durée de la fausse pub
 
   // Le bouton revient soit 30 min, soit 1h après son utilisation, au hasard.

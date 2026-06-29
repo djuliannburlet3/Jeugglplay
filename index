@@ -1,0 +1,1092 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+:root{
+  --navy: #0b1220;
+  --navy-light: #161f37;
+  --navy-card: #1b2540;
+  --gold: #d4af37;
+  --gold-soft: #f0d98c;
+  --cream: #f3ecd9;
+  --muted: #8a93ad;
+  --green: #3f8f6f;
+  --green-soft: #2a4a3d;
+  --burgundy: #8a3245;
+  --line: rgba(212,175,55,0.18);
+}
+
+*{ box-sizing:border-box; }
+
+.htg-app{
+  background: radial-gradient(1200px 600px at 50% -10%, #1a2745 0%, var(--navy) 55%) var(--navy);
+  color: var(--cream);
+  font-family:'Inter', sans-serif;
+  padding: 18px;
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.htg-topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding: 14px 18px;
+  background: linear-gradient(180deg, var(--navy-card), var(--navy-light));
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+.htg-brand{
+  font-family:'Playfair Display', serif;
+  font-weight:800;
+  font-size: 19px;
+  letter-spacing: 0.3px;
+  color: var(--gold-soft);
+}
+.htg-brand-sub{ color: var(--cream); font-weight:600; font-size:11px; display:block; letter-spacing:1.5px; text-transform:uppercase; opacity:0.6; margin-top:2px;}
+.htg-sixstar-badge{
+  display:none;
+  margin-left:8px;
+  font-size:10.5px;
+  font-weight:700;
+  color: var(--gold);
+  background: rgba(212,175,55,0.15);
+  border: 1px solid var(--gold);
+  border-radius: 6px;
+  padding: 2px 6px;
+  vertical-align: middle;
+  letter-spacing: 0.5px;
+}
+.htg-stats{ text-align:right; }
+.htg-money{ font-size:20px; font-weight:700; color: var(--gold-soft); font-family:'Playfair Display', serif;}
+.htg-income{ font-size:12px; color: var(--muted); margin-top:2px;}
+
+.htg-panel{
+  background: linear-gradient(180deg, var(--navy-card), var(--navy-light));
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px;
+  position: relative;
+  overflow:hidden;
+}
+.htg-panel::before{
+  content:"";
+  position:absolute; inset:0;
+  background: linear-gradient(120deg, transparent 40%, rgba(212,175,55,0.06) 50%, transparent 60%);
+  pointer-events:none;
+}
+.htg-floor-head{ display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+.htg-floor-emoji{ font-size:34px; }
+.htg-floor-name{ font-family:'Playfair Display', serif; font-size:21px; font-weight:700; color:var(--cream); }
+.htg-floor-sub{ font-size:12px; color:var(--muted); margin-top:2px; }
+
+.htg-progress-wrap{ margin: 12px 0 16px; }
+.htg-progress-label{ display:flex; justify-content:space-between; font-size:11px; color:var(--muted); margin-bottom:5px; }
+.htg-progress-bar{ height:8px; border-radius:6px; background: rgba(255,255,255,0.06); overflow:hidden; }
+.htg-progress-fill{ height:100%; background: linear-gradient(90deg, var(--gold), var(--gold-soft)); transition: width 0.3s ease; }
+.htg-progress-fill.done{ background: linear-gradient(90deg, var(--green), #5fc79a); }
+
+.htg-row-2{ display:flex; gap:10px; }
+.htg-btn{
+  flex:1;
+  border:none;
+  border-radius: 12px;
+  padding: 13px 10px;
+  font-family:'Inter', sans-serif;
+  font-weight:700;
+  font-size: 13px;
+  cursor:pointer;
+  transition: transform 0.08s ease, filter 0.15s ease;
+  color: var(--navy);
+}
+.htg-btn:active{ transform: scale(0.97); }
+.htg-btn-click{
+  background: linear-gradient(180deg, var(--gold-soft), var(--gold));
+  box-shadow: 0 0 0 1px rgba(212,175,55,0.4), 0 8px 18px -8px rgba(212,175,55,0.6);
+  font-size:14px;
+}
+.htg-btn-hire{
+  background: linear-gradient(180deg, #cfd6e8, #aab3cf);
+}
+.htg-btn:disabled{
+  filter: grayscale(0.6) brightness(0.55);
+  cursor: not-allowed;
+}
+.htg-btn small{ display:block; font-weight:500; opacity:0.75; font-size:11px; margin-top:2px;}
+
+.htg-click-zone{ position:relative; }
+.htg-float{
+  position:absolute;
+  left:50%;
+  top:0;
+  font-weight:700;
+  color: var(--gold-soft);
+  font-size: 14px;
+  pointer-events:none;
+  animation: htgFloat 0.9s ease-out forwards;
+  white-space:nowrap;
+}
+@keyframes htgFloat{
+  0%{ opacity:1; transform: translate(-50%, 0); }
+  100%{ opacity:0; transform: translate(-50%, -42px); }
+}
+
+.htg-list-title{ font-size:11px; text-transform:uppercase; letter-spacing:1.5px; color:var(--muted); margin: 4px 4px 8px; }
+.htg-building{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  max-height: 320px;
+  overflow-y:auto;
+  padding-right: 2px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(212,175,55,0.35) transparent;
+}
+.htg-building::-webkit-scrollbar{ width:5px; }
+.htg-building::-webkit-scrollbar-track{ background:transparent; }
+.htg-building::-webkit-scrollbar-thumb{ background: rgba(212,175,55,0.35); border-radius:4px; }
+.htg-floor-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding: 10px 12px;
+  border-radius:12px;
+  background: var(--navy-card);
+  border: 1px solid var(--line);
+  cursor:pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.htg-floor-row:hover{ border-color: rgba(212,175,55,0.4); }
+.htg-floor-row.active{ border-color: var(--gold); background: linear-gradient(90deg, rgba(212,175,55,0.12), transparent); }
+.htg-floor-row.locked{ opacity:0.55; cursor: default; }
+.htg-floor-row.buyable{
+  opacity:1;
+  cursor:pointer;
+  border-color: var(--gold);
+  border-style: dashed;
+  animation: htgPulse 1.8s ease-in-out infinite;
+}
+@keyframes htgPulse{
+  0%,100%{ box-shadow: 0 0 0 0 rgba(212,175,55,0.25); }
+  50%{ box-shadow: 0 0 0 4px rgba(212,175,55,0.12); }
+}
+.htg-floor-row.completed{ border-color: rgba(63,143,111,0.6); }
+.htg-row-emoji{ font-size:20px; width:26px; text-align:center; }
+.htg-row-mid{ flex:1; min-width:0; }
+.htg-row-name{ font-size:13px; font-weight:600; }
+.htg-row-income{ font-size:11px; color:var(--muted); }
+.htg-row-right{ font-size:11px; text-align:right; color:var(--muted); white-space:nowrap; }
+.htg-row-right.unlock-cost{ color: var(--gold-soft); font-weight:700; }
+.htg-check{ color: #5fc79a; font-size:16px; }
+.htg-lock{ font-size:14px; }
+
+.htg-toasts{
+  position: fixed;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  z-index: 50;
+  width: calc(100% - 36px);
+  max-width: 524px;
+  pointer-events:none;
+}
+.htg-toast{
+  background: linear-gradient(180deg, var(--navy-card), var(--navy-light));
+  border: 1px solid var(--gold);
+  color: var(--gold-soft);
+  font-size: 13px;
+  font-weight:600;
+  padding: 10px 14px;
+  border-radius: 10px;
+  text-align:center;
+  animation: htgToastIn 0.25s ease, htgToastOut 0.4s ease 3.4s forwards;
+  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.6);
+}
+@keyframes htgToastIn{ from{ opacity:0; transform: translateY(8px);} to{opacity:1; transform: translateY(0);} }
+@keyframes htgToastOut{ to{ opacity:0; transform: translateY(-6px); } }
+
+.htg-footer-note{ font-size:10.5px; color:var(--muted); text-align:center; padding: 2px 8px 0; }
+.htg-reset{ background:none; border:none; color:var(--muted); text-decoration:underline; cursor:pointer; font-size:10.5px; font-family:inherit; }
+
+.htg-warning{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+  background: linear-gradient(180deg, var(--burgundy), #5e1c28);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 12px;
+  padding: 12px 16px;
+}
+.htg-warning-text{ font-weight:700; font-size:13px; color:#fff; }
+.htg-warning-meta{ display:flex; justify-content:space-between; font-size:11.5px; color:rgba(255,255,255,0.85); }
+
+.htg-powerup-btn{
+  border:none;
+  border-radius:12px;
+  padding:13px;
+  font-family:'Inter', sans-serif;
+  font-weight:700;
+  font-size:13px;
+  cursor:pointer;
+  background: linear-gradient(180deg, var(--gold-soft), var(--gold));
+  color: var(--navy);
+  animation: htgPulse 1.8s ease-in-out infinite;
+}
+
+.htg-adoverlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  background: rgba(0,0,0,0.78);
+  z-index:100;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+.htg-adbox{
+  background: linear-gradient(180deg, var(--navy-card), var(--navy-light));
+  border:1px solid var(--gold);
+  border-radius:18px;
+  padding:0;
+  max-width:320px;
+  width:100%;
+  overflow:hidden;
+}
+.htg-ad-videoarea{
+  position:relative;
+  height:360px;
+  background: linear-gradient(150deg, #2b3a63, #141d33 60%, #0b1220);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.htg-ad-tag{
+  position:absolute; top:10px; left:10px;
+  background: rgba(255,255,255,0.16);
+  color:#fff;
+  font-size:10px;
+  font-weight:700;
+  padding:3px 9px;
+  border-radius:6px;
+  letter-spacing:0.4px;
+}
+.htg-ad-countdown{
+  position:absolute; top:10px; right:10px;
+  width:28px; height:28px;
+  border-radius:50%;
+  border:2px solid rgba(255,255,255,0.55);
+  display:flex; align-items:center; justify-content:center;
+  font-size:12px; font-weight:700; color:#fff;
+  background: rgba(0,0,0,0.3);
+}
+.htg-ad-icon{ font-size:62px; opacity:0.9; animation: htgAdFloat 2.4s ease-in-out infinite; }
+@keyframes htgAdFloat{ 0%,100%{ transform: translateY(0); } 50%{ transform: translateY(-10px); } }
+
+.htg-ad-promo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 14px;
+  background: rgba(255,255,255,0.04);
+  border-top:1px solid var(--line);
+}
+.htg-ad-promo-icon{
+  width:42px; height:42px;
+  border-radius:11px;
+  background: linear-gradient(160deg, var(--gold-soft), var(--burgundy));
+  display:flex; align-items:center; justify-content:center;
+  font-size:21px;
+  flex-shrink:0;
+}
+.htg-ad-promo-info{ flex:1; min-width:0; }
+.htg-ad-promo-name{ font-size:13px; font-weight:700; color:var(--cream); }
+.htg-ad-promo-rating{ font-size:11px; color:var(--muted); margin-top:2px; }
+.htg-ad-promo-cta{
+  border:none; border-radius:8px; padding:8px 14px;
+  font-size:12px; font-weight:700;
+  background: #3f8f6f; color:#fff; cursor:pointer; flex-shrink:0;
+}
+.htg-ad-claim{
+  display:block; width:calc(100% - 28px); margin:14px;
+  border:none; border-radius:10px; padding:12px;
+  font-weight:700; font-family:'Inter', sans-serif;
+  background: var(--gold); color:var(--navy); cursor:pointer;
+}
+.htg-ad-claim:disabled{ filter:grayscale(0.6) brightness(0.6); cursor:not-allowed; }
+
+.htg-adclose{
+  border:none;
+  border-radius:10px;
+  padding:11px 26px;
+  font-weight:700;
+  font-family:'Inter', sans-serif;
+  background: var(--gold);
+  color: var(--navy);
+  cursor:pointer;
+}
+.htg-adclose:disabled{ filter:grayscale(0.6) brightness(0.6); cursor:not-allowed; }
+
+.htg-celebrate{
+  display:none;
+  position:fixed;
+  inset:0;
+  background: radial-gradient(circle at 50% 28%, rgba(212,175,55,0.18), rgba(0,0,0,0.86));
+  z-index:200;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  overflow:hidden;
+}
+.htg-confetti{ position:absolute; inset:0; pointer-events:none; overflow:hidden; }
+.htg-confetti-piece{
+  position:absolute;
+  top:-12px;
+  width:8px;
+  height:14px;
+  opacity:0.9;
+  animation-name: htgConfettiFall;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+@keyframes htgConfettiFall{
+  to{ transform: translateY(112vh) rotate(540deg); opacity:0.25; }
+}
+.htg-celebrate-box{
+  position:relative;
+  z-index:1;
+  background: linear-gradient(180deg, var(--navy-card), var(--navy-light));
+  border:1px solid var(--gold);
+  border-radius:20px;
+  padding:34px 26px;
+  max-width:380px;
+  width:100%;
+  text-align:center;
+  box-shadow: 0 20px 60px -10px rgba(0,0,0,0.7);
+}
+.htg-celebrate-stars{ font-size:30px; color: var(--gold); letter-spacing:4px; margin-bottom:12px; }
+.htg-sixth-star{
+  display:inline-block;
+  color: var(--gold-soft);
+  animation: htgStarPop 0.6s ease 0.4s both, htgStarGlow 1.6s ease-in-out 1.2s infinite;
+}
+@keyframes htgStarPop{ from{ transform: scale(0) rotate(-90deg); opacity:0; } to{ transform: scale(1) rotate(0); opacity:1; } }
+@keyframes htgStarGlow{ 0%,100%{ text-shadow: 0 0 6px rgba(240,217,140,0.4); } 50%{ text-shadow: 0 0 18px rgba(240,217,140,0.9); } }
+.htg-celebrate-title{ font-family:'Playfair Display', serif; font-size:20px; font-weight:800; color:var(--cream); margin-bottom:10px; line-height:1.3; }
+.htg-celebrate-sub{ font-size:12.5px; color:var(--muted); margin-bottom:16px; line-height:1.45; }
+.htg-celebrate-stat{ font-size:13px; color: var(--gold-soft); margin-bottom:8px; }
+.htg-celebrate-bonus{ font-size:13px; font-weight:700; color:#5fc79a; margin-bottom:20px; }
+</style>
+
+<div class="htg-app" id="htg-app">
+  <div class="htg-topbar">
+    <div class="htg-brand"><span id="htg-brand-name">Hôtel Excelsior</span><span class="htg-sixstar-badge" id="htg-sixstar-badge">⭐ 6 ÉTOILES</span><span class="htg-brand-sub" id="htg-brand-sub">Idle Tycoon</span></div>
+    <div class="htg-stats">
+      <div class="htg-money" id="htg-money">0 €</div>
+      <div class="htg-income" id="htg-income">+0 €/s</div>
+    </div>
+  </div>
+
+  <div class="htg-warning" id="htg-warning" style="display:none;">
+    <div class="htg-warning-text">⚠️ Auto-clicker détecté ! Clics bloqués 10s — au 15ᵉ avertissement, ta progression sera réinitialisée.</div>
+    <div class="htg-warning-meta">
+      <span id="htg-warning-time">10s</span>
+      <span id="htg-warning-count">Avertissement 1/15</span>
+    </div>
+  </div>
+
+  <div class="htg-panel htg-click-zone" id="htg-clickzone">
+    <div class="htg-floor-head">
+      <div class="htg-floor-emoji" id="htg-active-emoji">🛎️</div>
+      <div>
+        <div class="htg-floor-name" id="htg-active-name">Hall d'accueil</div>
+        <div class="htg-floor-sub" id="htg-active-sub">0 employé · 0 €/s</div>
+      </div>
+    </div>
+
+    <div class="htg-progress-wrap">
+      <div class="htg-progress-label">
+        <span id="htg-progress-text">Progression de l'étage</span>
+        <span id="htg-progress-pct">0%</span>
+      </div>
+      <div class="htg-progress-bar"><div class="htg-progress-fill" id="htg-progress-fill" style="width:0%"></div></div>
+    </div>
+
+    <div class="htg-row-2">
+      <button class="htg-btn htg-btn-click" id="htg-btn-click">Travailler<small id="htg-click-value">+1 €</small></button>
+      <button class="htg-btn htg-btn-hire" id="htg-btn-hire">Embaucher<small id="htg-hire-cost">10 €</small></button>
+    </div>
+  </div>
+
+  <button class="htg-powerup-btn" id="htg-powerup-btn" style="display:none;">🎁 Auto-clic gratuit (1 min, 10 clics/s) — regarder une pub</button>
+
+  <div>
+    <div class="htg-list-title">L'hôtel — étages</div>
+    <div class="htg-building" id="htg-building"></div>
+  </div>
+
+  <div class="htg-footer-note">
+    Sauvegarde automatique activée
+  </div>
+</div>
+
+<div class="htg-toasts" id="htg-toasts"></div>
+
+<div class="htg-adoverlay" id="htg-adoverlay" style="display:none;">
+  <div class="htg-adbox">
+    <div class="htg-ad-videoarea">
+      <div class="htg-ad-tag">Annonce</div>
+      <div class="htg-ad-countdown" id="htg-adtimer">5</div>
+      <div class="htg-ad-icon">🚀</div>
+    </div>
+    <div class="htg-ad-promo">
+      <div class="htg-ad-promo-icon">🎮</div>
+      <div class="htg-ad-promo-info">
+        <div class="htg-ad-promo-name">Super Aventure</div>
+        <div class="htg-ad-promo-rating">⭐ 4.6 · 128 k avis</div>
+      </div>
+      <button class="htg-ad-promo-cta" id="htg-ad-cta">Installer</button>
+    </div>
+    <button class="htg-ad-claim" id="htg-adclose" disabled>Récupérer la récompense</button>
+  </div>
+</div>
+
+<div class="htg-celebrate" id="htg-celebrate" style="display:none;">
+  <div class="htg-confetti" id="htg-confetti"></div>
+  <div class="htg-celebrate-box">
+    <div class="htg-celebrate-stars">★★★★★<span class="htg-sixth-star">★</span></div>
+    <div class="htg-celebrate-title" id="htg-celebrate-title">Hôtel Excelsior élevé au rang de 6 étoiles</div>
+    <div class="htg-celebrate-sub" id="htg-celebrate-sub">Une distinction jamais accordée à aucun autre établissement au monde — ton hôtel entre dans la légende.</div>
+    <div class="htg-celebrate-stat" id="htg-celebrate-stat"></div>
+    <div class="htg-celebrate-bonus" id="htg-celebrate-bonus">🏆 Bonus légendaire permanent : revenus ×2</div>
+    <button class="htg-adclose" id="htg-celebrate-close">Continuer l'aventure</button>
+  </div>
+</div>
+
+<script>
+(function(){
+
+  // ---------------------------------------------------------------
+  // CONFIG DES ÉTAGES — modifie ces chiffres pour rééquilibrer le jeu
+  // ---------------------------------------------------------------
+  const HOTEL1_FLOORS = [
+    { name:"Hall d'accueil",        emoji:"🛎️", employee:"Réceptionniste",      baseCost:10,          baseIncome:1,        click:1,        goal:50 },
+    { name:"Chambres Standard",     emoji:"🛏️", employee:"Femme de ménage",     baseCost:50,          baseIncome:5,        click:5,        goal:250 },
+    { name:"Chambres Suites",       emoji:"🛌", employee:"Concierge",           baseCost:400,         baseIncome:30,       click:25,       goal:1500 },
+    { name:"Restaurant",            emoji:"🍽️", employee:"Chef cuisinier",      baseCost:3000,        baseIncome:150,      click:100,      goal:8000 },
+    { name:"Spa & Bien-être",       emoji:"💆", employee:"Masseur",             baseCost:20000,       baseIncome:800,      click:500,      goal:40000 },
+    { name:"Salle de Conférence",   emoji:"🎤", employee:"Organisateur",        baseCost:150000,      baseIncome:5000,     click:3000,     goal:250000 },
+    { name:"Casino",                emoji:"🎰", employee:"Croupier",            baseCost:1000000,     baseIncome:30000,    click:20000,    goal:1500000 },
+    { name:"Rooftop Bar",           emoji:"🍹", employee:"Barman",              baseCost:7000000,     baseIncome:180000,   click:120000,   goal:9000000 },
+    { name:"Piscine Panoramique",   emoji:"🏊", employee:"Maître-nageur",       baseCost:50000000,    baseIncome:1000000,  click:700000,   goal:50000000 },
+    { name:"Penthouse VIP",         emoji:"👑", employee:"Majordome personnel", baseCost:350000000,   baseIncome:6000000,  click:4000000,  goal:300000000 },
+  ];
+
+  // Deuxième hôtel — débloqué après avoir terminé tous les étages du premier.
+  // Numéros calibrés pour prendre le relais là où l'Excelsior s'arrête.
+  const HOTEL2_FLOORS = [
+    { name:"Marina d'accueil",          emoji:"🛥️", employee:"Capitaine de port",   baseCost:2e9,    baseIncome:4e7,   click:2.5e7, goal:2e9 },
+    { name:"Bungalows sur pilotis",     emoji:"🏝️", employee:"Intendant",           baseCost:1.5e10, baseIncome:2.5e8, click:1.5e8, goal:1.2e10 },
+    { name:"Suites Vue Océan",          emoji:"🌅", employee:"Majordome privé",     baseCost:1e11,   baseIncome:1.8e9, click:1e9,   goal:8e10 },
+    { name:"Restaurant Étoilé",         emoji:"🍾", employee:"Chef étoilé",         baseCost:7e11,   baseIncome:1.2e10,click:7e9,   goal:5.5e11 },
+    { name:"Spa Thalasso",              emoji:"🧖", employee:"Thérapeute",          baseCost:5e12,   baseIncome:8e10,  click:4.5e10,goal:3.8e12 },
+    { name:"Centre Nautique",           emoji:"🛶", employee:"Skipper",             baseCost:3.5e13, baseIncome:5.5e11,click:3e11,  goal:2.6e13 },
+    { name:"Casino Flottant",           emoji:"🎲", employee:"Croupier en chef",    baseCost:2.4e14, baseIncome:3.6e12,click:2e12,  goal:1.8e14 },
+    { name:"Rooftop Infinity",          emoji:"🌌", employee:"Mixologue",           baseCost:1.6e15, baseIncome:2.4e13,click:1.3e13,goal:1.2e15 },
+    { name:"Île Privée",                emoji:"🏖️", employee:"Garde forestier",     baseCost:1.1e16, baseIncome:1.6e14,click:9e13,  goal:8e15 },
+    { name:"Suite Présidentielle Océan",emoji:"👑", employee:"Chef de protocole",   baseCost:7.5e16, baseIncome:1.1e15,click:6e14,  goal:5.5e16 },
+  ];
+
+  const HOTELS = [
+    {
+      name: "Hôtel Excelsior",
+      subtitle: "Idle Tycoon",
+      floors: HOTEL1_FLOORS,
+      theme: {
+        "--navy":"#0b1220", "--navy-light":"#161f37", "--navy-card":"#1b2540",
+        "--gold":"#d4af37", "--gold-soft":"#f0d98c", "--cream":"#f3ecd9",
+        "--muted":"#8a93ad", "--green":"#3f8f6f", "--green-soft":"#2a4a3d",
+        "--burgundy":"#8a3245", "--line":"rgba(212,175,55,0.18)"
+      }
+    },
+    {
+      name: "Riviera Palace",
+      subtitle: "Prestige Tycoon",
+      floors: HOTEL2_FLOORS,
+      theme: {
+        "--navy":"#04201f", "--navy-light":"#0a3534", "--navy-card":"#0f4544",
+        "--gold":"#2dd4bf", "--gold-soft":"#7ef0e3", "--cream":"#eafffb",
+        "--muted":"#7fb8b3", "--green":"#3f8f6f", "--green-soft":"#2a4a3d",
+        "--burgundy":"#ef6f5b", "--line":"rgba(45,212,191,0.22)"
+      }
+    },
+  ];
+
+  let FLOORS = HOTELS[0].floors; // réaffecté dynamiquement à chaque changement d'hôtel
+
+  const EMPLOYEE_GROWTH = 1.15;     // +15% de coût par employé embauché
+  const COMPLETION_BONUS = 1.10;    // +10% de revenus globaux par étage terminé
+  const HOTEL_MONEY_BOOST = 1.15;   // +15% d'argent offert au passage vers le nouvel hôtel
+  const OFFLINE_EFFICIENCY = 0.5;   // 50% des revenus gagnés pendant l'absence
+  const OFFLINE_CAP_HOURS = 8;
+  const SAVE_KEY = "hotel-tycoon-save";
+
+  // ---- Anti auto-clicker ----
+  const AUTOCLICK_MAX_CPS = 13;         // le message apparaît à partir de 14 clics/seconde
+  const AUTOCLICK_WINDOW_MS = 1000;    // fenêtre glissante d'1 seconde
+  const WARNING_DURATION = 10;         // secondes d'affichage du message (clics bloqués pendant ce temps)
+  const MAX_WARNINGS = 15;             // avertissements avant reset
+
+  // ---- Auto-clic "officiel" du jeu (récompensé par pub) ----
+  const POWERUP_AUTOCLICK_DURATION_MS = 60 * 1000; // dure 1 minute
+  const POWERUP_AUTOCLICK_RATE_MS = 100;           // 10 clics / seconde (= la limite autorisée)
+  const AD_DURATION_SEC = 5;                       // durée de la fausse pub
+
+  // Le bouton revient soit 30 min, soit 1h après son utilisation, au hasard.
+  function randomPowerupDelay(){
+    const minutes = Math.random() < 0.5 ? 30 : 60;
+    return minutes * 60 * 1000;
+  }
+
+  let state = {
+    money: 20,
+    activeFloor: 0,
+    globalMult: 1,
+    floors: FLOORS.map((f, i) => ({ unlocked: i === 0, employees: 0, completed: false })),
+    warningCount: 0,
+    nextPowerupTime: Date.now() + randomPowerupDelay(),
+    totalEarned: 0,
+    currentHotel: 0,
+    hotelCompletionHandled: false,
+    hotelsCompleted: 0,
+  };
+
+  let storageAvailable = true;
+  let clickTimestamps = [];
+  let warningActive = false;
+  let warningInterval = null;
+  let officialAutoClickActive = false;
+  let officialAutoClickTimer = null;
+
+  // ---------------- Helpers ----------------
+  function formatMoney(n){
+    const sign = n < 0 ? "-" : "";
+    n = Math.abs(n);
+    if(n < 1000) return sign + n.toFixed(n < 10 ? 1 : 0) + " €";
+    const units = [
+      [1e12, "Md€"], [1e9, "Md€"], [1e6, "M€"], [1e3, "K€"]
+    ];
+    if(n >= 1e9) return sign + (n/1e9).toFixed(2) + " Md€";
+    if(n >= 1e6) return sign + (n/1e6).toFixed(2) + " M€";
+    return sign + (n/1e3).toFixed(2) + " K€";
+  }
+
+  const HIRE_COST_MULTIPLIER = 1.5; // embaucher coûte 50% plus cher
+
+  function employeeCost(floorIdx){
+    const f = FLOORS[floorIdx];
+    const owned = state.floors[floorIdx].employees;
+    return Math.ceil(f.baseCost * HIRE_COST_MULTIPLIER * Math.pow(EMPLOYEE_GROWTH, owned));
+  }
+
+  function floorIncome(floorIdx){
+    const f = FLOORS[floorIdx];
+    const fs = state.floors[floorIdx];
+    if(!fs.unlocked) return 0;
+    return f.baseIncome * fs.employees * (1 + fs.employees * 0.05);
+  }
+
+  const PASSIVE_INCOME_MULTIPLIER = 0.7; // revenus par seconde réduits de 30%
+
+  function totalIncomePerSecond(){
+    let sum = 0;
+    for(let i=0;i<FLOORS.length;i++) sum += floorIncome(i);
+    return sum * state.globalMult * PASSIVE_INCOME_MULTIPLIER;
+  }
+
+  function nextLockedIndex(){
+    for(let i=0;i<FLOORS.length;i++) if(!state.floors[i].unlocked) return i;
+    return -1;
+  }
+
+  // ---------------- Actions ----------------
+  function clickActiveFloor(){
+    if(warningActive) return; // clics bloqués pendant l'affichage de l'avertissement
+    const i = state.activeFloor;
+    const f = FLOORS[i];
+    const fs = state.floors[i];
+    if(!fs.unlocked) return;
+    if(recordClick()) return; // ce clic vient de dépasser la limite -> bloqué, pas de gain
+    const gain = f.click * state.globalMult;
+    state.money += gain;
+    state.totalEarned += gain;
+    spawnFloatText("+" + formatMoney(gain));
+    render();
+  }
+
+  function hireForActiveFloor(){
+    const i = state.activeFloor;
+    const fs = state.floors[i];
+    if(!fs.unlocked) return;
+    const cost = employeeCost(i);
+    if(state.money >= cost){
+      state.money -= cost;
+      fs.employees += 1;
+      render();
+    }
+  }
+
+  function selectFloor(i){
+    const fs = state.floors[i];
+    if(fs.unlocked){
+      state.activeFloor = i;
+      render();
+      return;
+    }
+    if(i === nextLockedIndex()){
+      const prev = FLOORS[i-1];
+      const prevIncome = floorIncome(i-1);
+      showToast("🔒 Termine " + prev.name + " (" + formatMoney(prevIncome) + "/" + formatMoney(prev.goal) + " €/s) — il s'ouvrira automatiquement");
+    } else {
+      showToast("🔒 Débloque d'abord les étages précédents");
+    }
+  }
+
+  function checkCompletions(){
+    syncFloorUnlocks();
+    for(let i=0;i<FLOORS.length;i++){
+      const f = FLOORS[i];
+      const fs = state.floors[i];
+      if(fs.unlocked && !fs.completed && floorIncome(i) >= f.goal){
+        fs.completed = true;
+        state.globalMult *= COMPLETION_BONUS;
+        if(i === FLOORS.length - 1){
+          if(!state.hotelCompletionHandled){
+            state.hotelCompletionHandled = true;
+            triggerHotelCompletionCelebration();
+          }
+        } else {
+          showToast("✅ " + f.name + " terminé ! Revenus globaux +10%");
+        }
+        syncFloorUnlocks();
+        renderBuilding();
+      }
+    }
+  }
+
+  // Garantit que tout étage marqué "terminé" a bien son étage suivant débloqué,
+  // même si cet état "terminé" provient d'une ancienne sauvegarde.
+  function syncFloorUnlocks(){
+    for(let i=0;i<FLOORS.length-1;i++){
+      if(state.floors[i].completed && !state.floors[i+1].unlocked){
+        state.floors[i+1].unlocked = true;
+        state.activeFloor = i+1;
+        showToast("🏗️ " + FLOORS[i+1].name + " est maintenant ouvert !");
+      }
+    }
+  }
+
+  function triggerHotelCompletionCelebration(){
+    const overlay = document.getElementById("htg-celebrate");
+    const titleEl = document.getElementById("htg-celebrate-title");
+    const subEl = document.getElementById("htg-celebrate-sub");
+    const bonusEl = document.getElementById("htg-celebrate-bonus");
+    const btn = document.getElementById("htg-celebrate-close");
+    const currentName = HOTELS[state.currentHotel].name;
+    const hasNext = state.currentHotel + 1 < HOTELS.length;
+
+    document.getElementById("htg-celebrate-stat").textContent =
+      "Tu as généré un total de " + formatMoney(state.totalEarned) + " depuis le début de l'aventure.";
+
+    titleEl.textContent = currentName + " élevé au rang de 6 étoiles";
+
+    if(hasNext){
+      const next = HOTELS[state.currentHotel + 1];
+      subEl.textContent = "Une distinction jamais accordée à aucun autre établissement... et une nouvelle opportunité t'attend ailleurs.";
+      bonusEl.textContent = "🧳 Direction le " + next.name + " — +15% d'argent offert au départ";
+      btn.textContent = "Découvrir " + next.name + " →";
+      btn.onclick = () => {
+        overlay.style.display = "none";
+        advanceToNextHotel();
+      };
+    } else {
+      subEl.textContent = "Une distinction jamais accordée à aucun autre établissement au monde — ton hôtel entre dans la légende.";
+      bonusEl.textContent = "🏆 Bonus légendaire permanent : revenus ×2";
+      state.globalMult *= 2;
+      btn.textContent = "Continuer l'aventure";
+      btn.onclick = () => {
+        overlay.style.display = "none";
+      };
+    }
+
+    state.hotelsCompleted += 1;
+    spawnConfetti();
+    overlay.style.display = "flex";
+  }
+
+  function applyHotelTheme(hotelIdx){
+    const root = document.getElementById("htg-app");
+    const theme = HOTELS[hotelIdx].theme;
+    for(const key in theme){
+      root.style.setProperty(key, theme[key]);
+    }
+  }
+
+  function updateBrandDisplay(){
+    document.getElementById("htg-brand-name").textContent = HOTELS[state.currentHotel].name;
+    document.getElementById("htg-brand-sub").textContent = HOTELS[state.currentHotel].subtitle;
+  }
+
+  function advanceToNextHotel(){
+    const nextIdx = state.currentHotel + 1;
+    if(nextIdx >= HOTELS.length) return;
+
+    state.currentHotel = nextIdx;
+    FLOORS = HOTELS[nextIdx].floors;
+    state.floors = FLOORS.map((f, i) => ({ unlocked: i === 0, employees: 0, completed: false }));
+    state.activeFloor = 0;
+    state.hotelCompletionHandled = false;
+    state.money *= HOTEL_MONEY_BOOST;
+
+    applyHotelTheme(nextIdx);
+    updateBrandDisplay();
+    showToast("🏨 Bienvenue au " + HOTELS[nextIdx].name + " !");
+    render();
+    renderBuilding();
+    saveGame();
+  }
+
+  function spawnConfetti(){
+    const wrap = document.getElementById("htg-confetti");
+    wrap.innerHTML = "";
+    const colors = ["#d4af37", "#f0d98c", "#8a3245", "#3f8f6f", "#f3ecd9"];
+    for(let k=0; k<46; k++){
+      const piece = document.createElement("div");
+      piece.className = "htg-confetti-piece";
+      piece.style.left = (Math.random()*100) + "%";
+      piece.style.background = colors[Math.floor(Math.random()*colors.length)];
+      piece.style.animationDuration = (2.4 + Math.random()*2) + "s";
+      piece.style.animationDelay = (Math.random()*1.2) + "s";
+      wrap.appendChild(piece);
+    }
+  }
+
+  // ---------------- Détection d'auto-clicker ----------------
+  // Règle : le jeu autorise jusqu'à 10 clics/seconde (c'est exactement le rythme de
+  // l'auto-clic officiel ci-dessous). Tous les clics comptent dans le même compteur,
+  // qu'ils viennent d'un vrai clic, de l'auto-clic du jeu, ou d'un outil externe :
+  // si le total dépasse 10/s (ex. un auto-clicker externe utilisé EN PLUS de celui
+  // du jeu), l'avertissement se déclenche et bloque tous les clics pendant 10s.
+  function recordClick(){
+    const now = Date.now();
+    clickTimestamps.push(now);
+    const cutoff = now - AUTOCLICK_WINDOW_MS;
+    clickTimestamps = clickTimestamps.filter(t => t > cutoff);
+    if(clickTimestamps.length > AUTOCLICK_MAX_CPS){
+      triggerWarning();
+      clickTimestamps = [];
+      return true;
+    }
+    return false;
+  }
+
+  function triggerWarning(){
+    state.warningCount += 1;
+    warningActive = true;
+    let secondsLeft = WARNING_DURATION;
+
+    const banner = document.getElementById("htg-warning");
+    const timeEl = document.getElementById("htg-warning-time");
+    const countEl = document.getElementById("htg-warning-count");
+    const clickBtn = document.getElementById("htg-btn-click");
+
+    banner.style.display = "flex";
+    clickBtn.disabled = true;
+    timeEl.textContent = secondsLeft + "s";
+    countEl.textContent = "Avertissement " + state.warningCount + "/" + MAX_WARNINGS + " — clics bloqués";
+
+    if(warningInterval) clearInterval(warningInterval);
+    warningInterval = setInterval(() => {
+      secondsLeft -= 1;
+      timeEl.textContent = Math.max(secondsLeft, 0) + "s";
+      if(secondsLeft <= 0){
+        clearInterval(warningInterval);
+        banner.style.display = "none";
+        warningActive = false;
+        clickBtn.disabled = false;
+        if(state.warningCount >= MAX_WARNINGS){
+          performAutoclickReset();
+        }
+      }
+    }, 1000);
+  }
+
+  function performAutoclickReset(){
+    resetGame();
+    showToast("🚫 Progression réinitialisée : trop d'utilisation d'auto-clicker");
+  }
+
+  // ---------------- Auto-clic "officiel" (récompense pub) ----------------
+  function checkPowerupAvailability(){
+    if(officialAutoClickActive) return;
+    const btn = document.getElementById("htg-powerup-btn");
+    if(Date.now() >= state.nextPowerupTime){
+      btn.style.display = "block";
+    }
+  }
+
+  function onPowerupClick(){
+    document.getElementById("htg-powerup-btn").style.display = "none";
+    showFakeAd(() => {
+      activateOfficialAutoClick();
+      state.nextPowerupTime = Date.now() + randomPowerupDelay();
+      saveGame();
+    });
+  }
+
+  // Pub simulée. Pour une vraie pub, remplace le contenu de cette fonction par
+  // l'appel au SDK du réseau publicitaire (ex. AdMob côté mobile) et appelle
+  // onComplete() dans son callback "reward received".
+  function showFakeAd(onComplete){
+    const overlay = document.getElementById("htg-adoverlay");
+    const timerEl = document.getElementById("htg-adtimer");
+    const closeBtn = document.getElementById("htg-adclose");
+    overlay.style.display = "flex";
+    closeBtn.disabled = true;
+    let t = AD_DURATION_SEC;
+    timerEl.textContent = t;
+
+    const interval = setInterval(() => {
+      t -= 1;
+      timerEl.textContent = t > 0 ? t : "✓";
+      if(t <= 0){
+        clearInterval(interval);
+        closeBtn.disabled = false;
+      }
+    }, 1000);
+
+    closeBtn.onclick = () => {
+      overlay.style.display = "none";
+      onComplete();
+    };
+  }
+
+  function activateOfficialAutoClick(){
+    officialAutoClickActive = true;
+    showToast("🤖 Auto-clic du jeu activé pendant 1 minute !");
+    let elapsed = 0;
+    officialAutoClickTimer = setInterval(() => {
+      clickActiveFloor();
+      elapsed += POWERUP_AUTOCLICK_RATE_MS;
+      if(elapsed >= POWERUP_AUTOCLICK_DURATION_MS){
+        clearInterval(officialAutoClickTimer);
+        officialAutoClickActive = false;
+        showToast("✅ Auto-clic du jeu terminé");
+      }
+    }, POWERUP_AUTOCLICK_RATE_MS);
+  }
+
+  // ---------------- Rendering ----------------
+  function spawnFloatText(text){
+    const zone = document.getElementById("htg-clickzone");
+    const el = document.createElement("div");
+    el.className = "htg-float";
+    el.textContent = text;
+    el.style.left = (45 + Math.random()*10) + "%";
+    el.style.top = "8px";
+    zone.appendChild(el);
+    setTimeout(()=> el.remove(), 950);
+  }
+
+  function showToast(msg){
+    const wrap = document.getElementById("htg-toasts");
+    const el = document.createElement("div");
+    el.className = "htg-toast";
+    el.textContent = msg;
+    wrap.appendChild(el);
+    setTimeout(()=> el.remove(), 3900);
+  }
+
+  function render(){
+    document.getElementById("htg-money").textContent = formatMoney(state.money);
+    document.getElementById("htg-income").textContent = "+" + formatMoney(totalIncomePerSecond()) + "/s";
+    document.getElementById("htg-sixstar-badge").style.display = state.hotelsCompleted > 0 ? "inline" : "none";
+
+    const i = state.activeFloor;
+    const f = FLOORS[i];
+    const fs = state.floors[i];
+    const income = floorIncome(i);
+    const pct = Math.min(100, (income / f.goal) * 100);
+
+    document.getElementById("htg-active-emoji").textContent = f.emoji;
+    document.getElementById("htg-active-name").textContent = f.name;
+    document.getElementById("htg-active-sub").textContent = fs.employees + " " + f.employee.toLowerCase() + (fs.employees === 1 ? "" : "s") + " · " + formatMoney(income) + "/s";
+
+    const fillEl = document.getElementById("htg-progress-fill");
+    fillEl.style.width = pct + "%";
+    fillEl.classList.toggle("done", fs.completed);
+    document.getElementById("htg-progress-pct").textContent = fs.completed ? "Terminé ✓" : Math.floor(pct) + "%";
+    document.getElementById("htg-progress-text").textContent = fs.completed ? "Étage terminé" : "Objectif : " + formatMoney(f.goal) + "/s";
+
+    document.getElementById("htg-click-value").textContent = "+" + formatMoney(f.click * state.globalMult);
+    const hireBtn = document.getElementById("htg-btn-hire");
+    const cost = employeeCost(i);
+    document.getElementById("htg-hire-cost").textContent = formatMoney(cost);
+    hireBtn.disabled = state.money < cost;
+  }
+
+  function renderBuilding(){
+    const wrap = document.getElementById("htg-building");
+    wrap.innerHTML = "";
+    const nextIdx = nextLockedIndex();
+
+    // affichage du dernier étage en haut, du hall en bas (vue "bâtiment")
+    for(let i = FLOORS.length - 1; i >= 0; i--){
+      const f = FLOORS[i];
+      const fs = state.floors[i];
+      const row = document.createElement("div");
+      row.className = "htg-floor-row" +
+        (fs.unlocked ? "" : (i === nextIdx ? " buyable" : " locked")) +
+        (i === state.activeFloor && fs.unlocked ? " active" : "") +
+        (fs.completed ? " completed" : "");
+
+      const emoji = document.createElement("div");
+      emoji.className = "htg-row-emoji";
+      emoji.textContent = fs.unlocked ? f.emoji : "🔒";
+      row.appendChild(emoji);
+
+      const mid = document.createElement("div");
+      mid.className = "htg-row-mid";
+      const nameEl = document.createElement("div");
+      nameEl.className = "htg-row-name";
+      nameEl.textContent = f.name;
+      mid.appendChild(nameEl);
+      const incEl = document.createElement("div");
+      incEl.className = "htg-row-income";
+      incEl.textContent = fs.unlocked ? formatMoney(floorIncome(i)) + "/s" : "verrouillé";
+      mid.appendChild(incEl);
+      row.appendChild(mid);
+
+      const right = document.createElement("div");
+      right.className = "htg-row-right";
+      if(fs.completed){
+        right.innerHTML = '<span class="htg-check">✓</span>';
+      } else if(!fs.unlocked && i === nextIdx){
+        right.classList.add("unlock-cost");
+        const prevIncome = floorIncome(i-1);
+        right.textContent = formatMoney(prevIncome) + "/" + formatMoney(FLOORS[i-1].goal);
+      } else if(!fs.unlocked){
+        right.textContent = "—";
+      }
+      row.appendChild(right);
+
+      row.addEventListener("click", () => selectFloor(i));
+      wrap.appendChild(row);
+    }
+  }
+
+  // ---------------- Save / Load ----------------
+  async function saveGame(){
+    if(!storageAvailable) return;
+    try{
+      const payload = JSON.stringify({ ...state, lastSave: Date.now() });
+      const result = await window.storage.set(SAVE_KEY, payload);
+      if(!result) storageAvailable = false;
+    }catch(e){
+      console.error("Échec de la sauvegarde :", e);
+      storageAvailable = false;
+    }
+  }
+
+  async function loadGame(){
+    try{
+      const result = await window.storage.get(SAVE_KEY);
+      if(result && result.value){
+        const saved = JSON.parse(result.value);
+        state.money = saved.money;
+        state.activeFloor = saved.activeFloor;
+        state.globalMult = saved.globalMult;
+        state.floors = saved.floors;
+        state.warningCount = saved.warningCount || 0;
+        state.nextPowerupTime = saved.nextPowerupTime || (Date.now() + randomPowerupDelay());
+        state.totalEarned = saved.totalEarned || 0;
+        state.sixStarAchieved = saved.sixStarAchieved || false;
+
+        const elapsedMs = Date.now() - (saved.lastSave || Date.now());
+        const elapsedSec = Math.min(elapsedMs / 1000, OFFLINE_CAP_HOURS * 3600);
+        if(elapsedSec > 30){
+          const gain = totalIncomePerSecond() * elapsedSec * OFFLINE_EFFICIENCY;
+          state.money += gain;
+          state.totalEarned += gain;
+          const hours = (elapsedSec/3600).toFixed(1);
+          showToast("👋 Bon retour ! +" + formatMoney(gain) + " gagnés pendant " + hours + "h d'absence");
+        }
+      }
+    }catch(e){
+      // pas de sauvegarde existante ou stockage indisponible — on démarre une nouvelle partie
+      console.log("Nouvelle partie (pas de sauvegarde trouvée).");
+    }
+  }
+
+  async function resetGame(){
+    state = {
+      money: 20,
+      activeFloor: 0,
+      globalMult: 1,
+      floors: FLOORS.map((f, i) => ({ unlocked: i === 0, employees: 0, completed: false })),
+      warningCount: 0,
+      nextPowerupTime: Date.now() + randomPowerupDelay(),
+      totalEarned: 0,
+      sixStarAchieved: false,
+    };
+    clickTimestamps = [];
+    warningActive = false;
+    if(warningInterval) clearInterval(warningInterval);
+    document.getElementById("htg-warning").style.display = "none";
+    document.getElementById("htg-celebrate").style.display = "none";
+    document.getElementById("htg-btn-click").disabled = false;
+    document.getElementById("htg-powerup-btn").style.display = "none";
+    try{ await window.storage.delete(SAVE_KEY); }catch(e){}
+    render();
+    renderBuilding();
+  }
+
+  // ---------------- Game loop ----------------
+  let lastTick = performance.now();
+  function tick(){
+    const now = performance.now();
+    const dt = (now - lastTick) / 1000;
+    lastTick = now;
+    const passive = totalIncomePerSecond() * dt;
+    state.money += passive;
+    state.totalEarned += passive;
+    checkCompletions();
+    render();
+    requestAnimationFrame(tick);
+  }
+
+  // ---------------- Init ----------------
+  document.getElementById("htg-btn-click").addEventListener("click", clickActiveFloor);
+  document.getElementById("htg-btn-hire").addEventListener("click", hireForActiveFloor);
+  document.getElementById("htg-powerup-btn").addEventListener("click", onPowerupClick);
+  document.getElementById("htg-ad-cta").addEventListener("click", () => {
+    showToast("🎭 C'est une pub simulée, rien à installer ici !");
+  });
+
+  loadGame().then(() => {
+    syncFloorUnlocks();
+    render();
+    renderBuilding();
+    requestAnimationFrame(tick);
+    setInterval(saveGame, 5000);
+    setInterval(checkPowerupAvailability, 1000);
+    setInterval(renderBuilding, 300);
+    checkPowerupAvailability();
+  });
+
+})();
+</script>

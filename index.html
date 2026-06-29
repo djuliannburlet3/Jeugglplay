@@ -86,7 +86,6 @@ body {
   letter-spacing: 0.5px;
 }
 
-/* LA CASE DES FINANCES */
 .htg-stats{ 
   text-align: right; 
   background: rgba(5, 10, 18, 0.6);
@@ -119,7 +118,6 @@ body {
 .htg-floor-name{ font-family:'Playfair Display', serif; font-size:21px; font-weight:700; color:var(--cream); }
 .htg-floor-sub{ font-size:12px; color:var(--muted); margin-top:2px; }
 
-/* Zone d'affichage des unités (Cases) */
 .htg-unit-container {
   margin: 12px 0;
   background: rgba(0, 0, 0, 0.2);
@@ -188,7 +186,6 @@ body {
 }
 .htg-btn small{ display:block; font-weight:500; opacity:0.75; font-size:11px; margin-top:2px;}
 
-/* Section Banque */
 .htg-bank-panel {
   background: linear-gradient(180deg, #111a2e, #0f1626);
   border: 1px solid rgba(0, 229, 255, 0.2);
@@ -238,7 +235,6 @@ body {
 .htg-btn-dep { background: #1e3a8a; color: #fff; }
 .htg-btn-wit { background: #374151; color: #fff; }
 
-/* Section Auto-clic Premium Shop */
 .htg-shop-panel {
   background: linear-gradient(180deg, #201335, #140b24);
   border: 1px solid rgba(168, 85, 247, 0.4);
@@ -367,12 +363,12 @@ body {
   font-weight:700;
   font-size:13px;
   cursor:pointer;
-  background: linear-gradient(180deg, var(--gold-soft), var(--gold));
-  color: var(--navy);
+  width: 100%;
+  text-align: center;
 }
 
 /* Overlays / Modals */
-.htg-adoverlay, .htg-celebrate, .htg-prestige-overlay{
+.htg-celebrate{
   display:none;
   position:fixed;
   inset:0;
@@ -382,7 +378,7 @@ body {
   justify-content:center;
   padding:20px;
 }
-.htg-adbox, .htg-celebrate-box, .htg-prestige-box{
+.htg-celebrate-box{
   background: linear-gradient(180deg, var(--navy-card), var(--navy-light));
   border:1px solid var(--gold);
   border-radius:18px;
@@ -391,46 +387,22 @@ body {
   width:100%;
   text-align: center;
 }
-.htg-ad-videoarea{
-  position:relative;
-  height:180px;
-  background: linear-gradient(150deg, #2b3a63, #141d33);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin-bottom: 12px;
-  border-radius: 10px;
-}
-.htg-ad-tag{ position:absolute; top:10px; left:10px; background: rgba(255,255,255,0.16); color:#fff; font-size:10px; padding:3px 9px; border-radius:6px;}
-.htg-ad-countdown{ position:absolute; top:10px; right:10px; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:#fff; background: rgba(0,0,0,0.3);}
-.htg-ad-icon{ font-size:48px; }
 
-.htg-ad-promo{ display:flex; align-items:center; gap:10px; padding:12px; background: rgba(255,255,255,0.04); border-radius: 8px; margin-bottom: 12px;}
-.htg-ad-promo-info{ flex:1; text-align: left; }
-.htg-ad-promo-name{ font-size:13px; font-weight:700; color:var(--cream); }
-.htg-ad-promo-rating{ font-size:11px; color:var(--muted); }
-.htg-ad-promo-cta{ border:none; border-radius:6px; padding:6px 12px; font-size:12px; font-weight:700; background: #3f8f6f; color:#fff; }
-
-.htg-ad-claim, .htg-adclose{
+.htg-adclose{
   display:block; width:100%; border:none; border-radius:10px; padding:12px; font-weight:700; background: var(--gold); color:var(--navy); cursor:pointer; margin-top: 10px;
 }
-.htg-ad-claim:disabled{ filter:grayscale(0.6) brightness(0.6); cursor:not-allowed; }
+
+/* Style du bouton Rebirth Vert */
+.htg-btn-rebirth-action {
+  background: linear-gradient(135deg, #10b981, #059669) !important;
+  color: white !important;
+}
 
 .htg-celebrate-stars{ font-size:30px; color: var(--gold); margin-bottom:12px; }
 .htg-celebrate-title{ font-family:'Playfair Display', serif; font-size:20px; font-weight:800; color:var(--cream); margin-bottom:10px; }
-.htg-celebrate-sub, .htg-prestige-explain{ font-size:12.5px; color:var(--muted); margin-bottom:16px; line-height:1.45; text-align: left;}
+.htg-celebrate-sub{ font-size:12.5px; color:var(--muted); margin-bottom:16px; line-height:1.45; text-align: left;}
 .htg-celebrate-stat{ font-size:13px; color: var(--gold-soft); margin-bottom:8px; }
 .htg-celebrate-bonus{ font-size:13px; font-weight:700; color:#5fc79a; margin-bottom:20px; }
-
-.htg-prestige-btn-trigger {
-  display: none; /* Masqué par défaut — n'apparaît que si TOUS les hôtels sont complétés */
-  background: linear-gradient(135deg, #a855f7, #6366f1);
-  color: white; border: none; padding: 14px; border-radius: 12px; font-weight: bold; cursor: pointer; width: 100%; margin-top: 4px;
-  box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
-}
-.htg-prestige-row-btns { display: flex; gap: 10px; margin-top: 15px; }
-.htg-btn-confirm { background: #3f8f6f; color: white; }
-.htg-btn-cancel { background: #b91c1c; color: white; }
 
 .htg-confetti{ position:absolute; inset:0; pointer-events:none; overflow:hidden; }
 .htg-confetti-piece{ position:absolute; top:-12px; width:8px; height:14px; animation-name: htgConfettiFall; animation-timing-function: linear; animation-fill-mode: forwards;}
@@ -440,6 +412,7 @@ body {
 <body>
 
 <div class="htg-app" id="htg-app">
+  <!-- TOPBAR -->
   <div class="htg-topbar">
     <div class="htg-brand">
       <span id="htg-brand-name">Hôtel Excelsior</span>
@@ -447,6 +420,7 @@ body {
       <span class="htg-brand-sub" id="htg-brand-sub">Idle Tycoon</span>
       <span class="htg-prestige-badge" id="htg-prestige-badge" style="display:none;">✨ Rebirth 0</span>
     </div>
+    <!-- FINANCES -->
     <div class="htg-stats">
       <div class="htg-money" id="htg-money">0 €</div>
       <div class="htg-diamonds" id="htg-diamonds">💎 0 Joyaux</div>
@@ -454,6 +428,7 @@ body {
     </div>
   </div>
 
+  <!-- PANNEAU ACTIF -->
   <div class="htg-panel htg-click-zone" id="htg-clickzone">
     <div class="htg-floor-head">
       <div class="htg-floor-emoji" id="htg-active-emoji">🛎️</div>
@@ -482,6 +457,7 @@ body {
     </div>
   </div>
 
+  <!-- COMPTE EN BANQUE -->
   <div class="htg-bank-panel">
     <div class="htg-bank-header">
       <span class="htg-bank-title">🏦 Compte d'Épargne de l'Hôtel</span>
@@ -495,6 +471,7 @@ body {
     </div>
   </div>
 
+  <!-- SHOP AUTO-CLIC PREMIUM -->
   <div class="htg-shop-panel">
     <div class="htg-shop-text">
       <div class="htg-shop-title">🤖 Assistant Auto-cliqueur Cosmique</div>
@@ -503,14 +480,14 @@ body {
     <button class="htg-btn-shop" id="htg-btn-buy-autoclick">Améliorer <br><span id="htg-autoclick-cost">💎 10 Joyaux</span></button>
   </div>
 
-  <button class="htg-powerup-btn" id="htg-powerup-btn" style="display:none;">🎁 Auto-clic gratuit (1 min, 10 clics/s) — regarder une pub</button>
+  <!-- LE BOUTON FLASH DE 2 MIN (MODIFIÉ) -->
+  <button class="htg-powerup-btn" id="htg-powerup-btn" style="display:none; background: linear-gradient(180deg, #00e5ff, #0097a7); color: #050a12;">⚡ Activer l'Auto-clic Flash (1 min, 10 clics/s) — 💎 15 Joyaux</button>
 
+  <!-- LISTE DES ETAGES -->
   <div>
     <div class="htg-list-title">L'hôtel — étages</div>
     <div class="htg-building" id="htg-building"></div>
   </div>
-
-  <button class="htg-prestige-btn-trigger" id="htg-prestige-open-btn">✨ Rebirth Disponible ! (Gains Multipliés)</button>
 
   <div class="htg-footer-note">
     <span>Sauvegarde automatique activée</span>
@@ -518,27 +495,10 @@ body {
   </div>
 </div>
 
+<!-- COMPOSANTS DES OVERLAYS / INTERFACES POPUP -->
 <div class="htg-toasts" id="htg-toasts"></div>
 
-<div class="htg-adoverlay" id="htg-adoverlay">
-  <div class="htg-adbox">
-    <div class="htg-ad-videoarea">
-      <div class="htg-ad-tag">Annonce</div>
-      <div class="htg-ad-countdown" id="htg-adtimer">5</div>
-      <div class="htg-ad-icon">🚀</div>
-    </div>
-    <div class="htg-ad-promo">
-      <div class="htg-ad-promo-icon">🎮</div>
-      <div class="htg-ad-promo-info">
-        <div class="htg-ad-promo-name">Super Aventure</div>
-        <div class="htg-ad-promo-rating">⭐ 4.6 · 128 k avis</div>
-      </div>
-      <button class="htg-ad-promo-cta" id="htg-ad-cta">Installer</button>
-    </div>
-    <button class="htg-ad-claim" id="htg-adclose" disabled>Récupérer la récompense</button>
-  </div>
-</div>
-
+<!-- POPUP UNIQUE DE FIN D'HOTEL / REBIRTH -->
 <div class="htg-celebrate" id="htg-celebrate">
   <div class="htg-confetti" id="htg-confetti"></div>
   <div class="htg-celebrate-box">
@@ -548,24 +508,6 @@ body {
     <div class="htg-celebrate-stat" id="htg-celebrate-stat"></div>
     <div class="htg-celebrate-bonus" id="htg-celebrate-bonus"></div>
     <button class="htg-adclose" id="htg-celebrate-close">Continuer l'aventure</button>
-  </div>
-</div>
-
-<div class="htg-prestige-overlay" id="htg-prestige-overlay">
-  <div class="htg-prestige-box">
-    <div class="htg-celebrate-stars">✨ REBIRTH ✨</div>
-    <div class="htg-celebrate-title">Activer le Rebirth Suprême ?</div>
-    <div class="htg-prestige-explain">
-      <strong>Qu'est-ce que le Rebirth ?</strong><br>
-      Vous allez réinitialiser votre argent, vos étages et employés pour retourner au tout premier hôtel.<br><br>
-      <strong>Pourquoi le faire ?</strong><br>
-      En échange, vous obtenez un **multiplicateur permanent de Rebirth** qui augmente massivement la vitesse de vos prochains gains !
-    </div>
-    <div class="htg-celebrate-bonus" id="htg-prestige-bonus-text">Prochain niveau : Rebirth +1</div>
-    <div class="htg-prestige-row-btns">
-      <button class="htg-btn htg-btn-confirm" id="htg-prestige-confirm">Valider le Rebirth</button>
-      <button class="htg-btn htg-btn-cancel" id="htg-prestige-cancel">Annuler</button>
-    </div>
   </div>
 </div>
 
@@ -643,8 +585,9 @@ body {
 
   let FLOORS = HOTELS[0].floors;
 
+  // AJUSTEMENTS DES COEFFICIENTS POUR CALMER L'ARGENT
   const EMPLOYEE_GROWTH = 1.15;
-  const COMPLETION_BONUS = 1.10;
+  const COMPLETION_BONUS = 1.03; // Équilibré : +3% par étage au lieu de 10%
   const HOTEL_MONEY_BOOST = 1.15;
   const OFFLINE_EFFICIENCY = 0.5;
   const OFFLINE_CAP_HOURS = 8;
@@ -652,10 +595,10 @@ body {
 
   const POWERUP_AUTOCLICK_DURATION_MS = 60 * 1000;
   const POWERUP_AUTOCLICK_RATE_MS = 100;
-  const AD_DURATION_SEC = 5;
 
+  // CHRONO FIXE DE 2 MINUTES POUR LE BOOST PREMIUM
   function randomPowerupDelay(){
-    return (Math.random() < 0.5 ? 30 : 60) * 60 * 1000;
+    return 2 * 60 * 1000; 
   }
 
   let state = {
@@ -672,8 +615,7 @@ body {
     totalEarned: 0,
     currentHotel: 0,
     hotelCompletionHandled: false,
-    hotelsCompleted: 0,
-    allHotelsCompleted: false
+    hotelsCompleted: 0
   };
 
   let storageAvailable = true;
@@ -712,7 +654,8 @@ body {
     const f = FLOORS[floorIdx];
     const fs = state.floors[floorIdx];
     if(!fs.unlocked) return 0;
-    return f.baseIncome * fs.employees * (1 + fs.employees * 0.02);
+    // FORMULE CALMÉE : Bonus cumulatif descendu à 1% au lieu de 5%
+    return f.baseIncome * fs.employees * (1 + fs.employees * 0.01);
   }
 
   const PASSIVE_INCOME_MULTIPLIER = 0.7;
@@ -788,7 +731,7 @@ body {
             triggerHotelCompletionCelebration();
           }
         } else {
-          showToast("✅ " + f.name + " terminé ! Gains +10% et 💎 +5");
+          showToast("✅ " + f.name + " terminé ! Gains +3% et 💎 +5");
         }
         syncFloorUnlocks();
         renderBuilding();
@@ -824,18 +767,23 @@ body {
       const next = HOTELS[state.currentHotel + 1];
       subEl.innerHTML = "Votre établissement entre dans la légende ! En route vers le prochain défi.";
       bonusEl.textContent = "🧳 Voyage vers le " + next.name + " !";
+      btn.className = "htg-adclose"; 
       btn.textContent = "Découvrir " + next.name + " →";
       btn.onclick = () => {
         overlay.style.display = "none";
         advanceToNextHotel();
       };
     } else {
-      subEl.innerHTML = "Incroyable ! Vous avez conquis le dernier hôtel de la galaxie. Le bouton de **Rebirth Suprême** est désormais déverrouillé en bas de votre écran.";
-      bonusEl.textContent = "🏆 Préparez-vous à relancer le cycle pour multiplier vos profits permanents !";
-      state.allHotelsCompleted = true;
-      document.getElementById("htg-prestige-open-btn").style.display = "block"; // Affiche enfin le bouton violet !
-      btn.textContent = "Ok, je veux voir !";
-      btn.onclick = () => { overlay.style.display = "none"; };
+      subEl.innerHTML = "Incroyable ! Vous avez conquis le tout dernier hôtel de l'univers !<br><br>Vous pouvez maintenant activer le **Rebirth Suprême** pour retourner au début du jeu, mais avec un boost massif permanent de tous vos futurs gains !";
+      const nextMultiplier = (state.prestigeLevel + 2) * 2;
+      bonusEl.textContent = "✨ Prochain bonus permanent : Gains ×" + nextMultiplier;
+      
+      btn.className = "htg-adclose htg-btn-rebirth-action";
+      btn.textContent = "Activer le Rebirth & Recommencer";
+      btn.onclick = () => {
+        overlay.style.display = "none";
+        triggerRebirthReset();
+      };
     }
 
     state.hotelsCompleted += 1;
@@ -856,6 +804,26 @@ body {
 
     applyHotelTheme(nextIdx);
     updateBrandDisplay();
+    render();
+    renderBuilding();
+    saveGame();
+  }
+
+  function triggerRebirthReset() {
+    state.prestigeLevel += 1;
+    state.prestigeMult = (state.prestigeLevel + 1) * 2;
+    
+    state.money = 20;
+    state.bankBalance = 0;
+    state.currentHotel = 0;
+    FLOORS = HOTELS[0].floors;
+    state.floors = FLOORS.map((f, i) => ({ unlocked: i === 0, employees: 0, completed: false }));
+    state.activeFloor = 0;
+    state.hotelCompletionHandled = false;
+
+    applyHotelTheme(0);
+    updateBrandDisplay();
+    showToast("✨ REBIRTH RÉUSSI ! Multiplicateur Global : ×" + state.prestigeMult);
     render();
     renderBuilding();
     saveGame();
@@ -902,38 +870,6 @@ body {
     }
   }
 
-  function openPrestigeScreen() {
-    const costCostText = document.getElementById("htg-prestige-bonus-text");
-    costCostText.textContent = "Prochain multiplicateur global de Rebirth : ×" + ((state.prestigeLevel + 2) * 2);
-    document.getElementById("htg-prestige-overlay").style.display = "flex";
-  }
-
-  function activatePrestige() {
-    state.prestigeLevel += 1;
-    state.prestigeMult = (state.prestigeLevel + 1) * 2; // Multiplicateur de Rebirth qui augmente
-    
-    // RESET COMPLET DE FIN DE REBIRTH
-    state.money = 20;
-    state.bankBalance = 0;
-    state.currentHotel = 0;
-    state.allHotelsCompleted = false; // Réinitialise la condition
-    FLOORS = HOTELS[0].floors;
-    state.floors = FLOORS.map((f, i) => ({ unlocked: i === 0, employees: 0, completed: false }));
-    state.activeFloor = 0;
-    state.hotelCompletionHandled = false;
-
-    // MASQUER LE BOUTON VIOLET IMMÉDIATEMENT
-    document.getElementById("htg-prestige-open-btn").style.display = "none";
-    document.getElementById("htg-prestige-overlay").style.display = "none";
-
-    applyHotelTheme(0);
-    updateBrandDisplay();
-    showToast("✨ REBIRTH EFFECTUÉ ! Multiplicateur Global : ×" + state.prestigeMult);
-    render();
-    renderBuilding();
-    saveGame();
-  }
-
   function checkPowerupAvailability(){
     if(officialAutoClickActive) return;
     const btn = document.getElementById("htg-powerup-btn");
@@ -942,29 +878,20 @@ body {
     }
   }
 
+  // LOGIQUE DU CLIC FLASH : ENLÈVE 15 JOYAUX SANS PUB
   function onPowerupClick(){
-    document.getElementById("htg-powerup-btn").style.display = "none";
-    showFakeAd(() => {
-      activateOfficialAutoClick();
-      state.nextPowerupTime = Date.now() + randomPowerupDelay();
+    if (state.diamonds >= 15) {
+      state.diamonds -= 15; 
+      document.getElementById("htg-powerup-btn").style.display = "none";
+      
+      activateOfficialAutoClick(); 
+      state.nextPowerupTime = Date.now() + randomPowerupDelay(); 
+      
+      render();
       saveGame();
-    });
-  }
-
-  function showFakeAd(onComplete){
-    const overlay = document.getElementById("htg-adoverlay");
-    const timerEl = document.getElementById("htg-adtimer");
-    const closeBtn = document.getElementById("htg-adclose");
-    overlay.style.display = "flex";
-    closeBtn.disabled = true;
-    let t = AD_DURATION_SEC;
-    timerEl.textContent = t;
-    const interval = setInterval(() => {
-      t -= 1;
-      timerEl.textContent = t > 0 ? t : "✓";
-      if(t <= 0){ clearInterval(interval); closeBtn.disabled = false; }
-    }, 1000);
-    closeBtn.onclick = () => { overlay.style.display = "none"; onComplete(); };
+    } else {
+      showToast("❌ Il vous faut 💎 15 Joyaux pour activer ce boost !");
+    }
   }
 
   function activateOfficialAutoClick(){
@@ -1033,14 +960,6 @@ body {
       badge.textContent = "✨ Rebirth " + state.prestigeLevel + " (×" + state.prestigeMult + ")";
     } else {
       badge.style.display = "none";
-    }
-
-    // Gérer l'affichage conditionnel strict du bouton violet de Rebirth
-    const mainPrestigeBtn = document.getElementById("htg-prestige-open-btn");
-    if(state.allHotelsCompleted) {
-      mainPrestigeBtn.style.display = "block";
-    } else {
-      mainPrestigeBtn.style.display = "none";
     }
 
     const i = state.activeFloor;
@@ -1202,11 +1121,6 @@ body {
   document.getElementById("htg-bank-wit-all").addEventListener("click", withdrawAllBank);
 
   document.getElementById("htg-btn-buy-autoclick").addEventListener("click", buyPaidAutoclick);
-  document.getElementById("htg-prestige-open-btn").addEventListener("click", openPrestigeScreen);
-  document.getElementById("htg-prestige-confirm").addEventListener("click", activatePrestige);
-  document.getElementById("htg-prestige-cancel").addEventListener("click", () => {
-    document.getElementById("htg-prestige-overlay").style.display = "none";
-  });
 
   document.getElementById("htg-reset-btn").addEventListener("click", () => {
     if(confirm("Tout remettre à zéro définitivement ?")) resetGame();
@@ -1224,7 +1138,7 @@ body {
   setInterval(saveGame, 5000);
   setInterval(checkPowerupAvailability, 1000);
 
-  // CHEAT ADMIN ANTI-BUG MONNAIE (1e151)
+  // CHEAT ADMIN
   let secretBuffer = "";
   document.addEventListener("keydown", (e) => {
     if(e.key.length !== 1) return;

@@ -501,6 +501,19 @@
     { name:"Suite Présidentielle Océan",emoji:"👑", employee:"Chef de protocole",   baseCost:7.5e16, baseIncome:1.1e15,click:6e14,  goal:5.5e16 },
   ];
 
+  const HOTEL3_FLOORS = [
+  { name:"Lobby Galactique", emoji:"🚀", employee:"Hôte spatial", baseCost:5e17, baseIncome:2e15, click:1e15, goal:4e17 },
+  { name:"Suites Orbitales", emoji:"🪐", employee:"Technicien orbital", baseCost:2e18, baseIncome:8e15, click:4e15, goal:1.5e18 },
+  { name:"Restaurant Zéro-G", emoji:"🍽️", employee:"Chef interstellaire", baseCost:1e19, baseIncome:5e16, click:2e16, goal:8e18 },
+  { name:"Spa Gravité Zéro", emoji:"🧘", employee:"Thérapeute spatial", baseCost:7e19, baseIncome:2e17, click:9e16, goal:5e19 },
+  { name:"Casino Galaxie", emoji:"🎰", employee:"Croupier cosmique", baseCost:4e20, baseIncome:1e18, click:5e17, goal:2e20 },
+  { name:"Observatoire", emoji:"🔭", employee:"Astronome", baseCost:2e21, baseIncome:5e18, click:2e18, goal:1e21 },
+  { name:"Hangar FTL", emoji:"🛸", employee:"Ingénieur warp", baseCost:1e22, baseIncome:2e19, click:8e18, goal:5e21 },
+  { name:"Dock de Vaisseaux", emoji:"🚢", employee:"Amiral", baseCost:5e22, baseIncome:8e19, click:3e19, goal:2e22 },
+  { name:"Station Spatiale", emoji:"🛰️", employee:"Commandant", baseCost:2e23, baseIncome:3e20, click:1e20, goal:8e22 },
+  { name:"Trône Galactique", emoji:"👑", employee:"Empereur", baseCost:1e24, baseIncome:1e21, click:5e20, goal:5e23 },
+];
+
   const HOTELS = [
     {
       name: "Hôtel Excelsior",
@@ -524,6 +537,24 @@
         "--burgundy":"#ef6f5b", "--line":"rgba(45,212,191,0.22)"
       }
     },
+      {
+    name: "Neo Galaxy Tower",
+    subtitle: "Cosmic Tycoon",
+    floors: HOTEL3_FLOORS,
+    theme: {
+      "--navy":"#070014",
+      "--navy-light":"#14002b",
+      "--navy-card":"#1f003f",
+      "--gold":"#b56cff",
+      "--gold-soft":"#d8a6ff",
+      "--cream":"#f3eaff",
+      "--muted":"#a48fb8",
+      "--green":"#3f8f6f",
+      "--green-soft":"#2a4a3d",
+      "--burgundy":"#6a1b4d",
+      "--line":"rgba(181,108,255,0.2)"
+    }
+  }
   ];
 
   let FLOORS = HOTELS[0].floors; // réaffecté dynamiquement à chaque changement d'hôtel

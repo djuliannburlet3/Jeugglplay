@@ -712,7 +712,7 @@ body {
     const f = FLOORS[floorIdx];
     const fs = state.floors[floorIdx];
     if(!fs.unlocked) return 0;
-    return f.baseIncome * fs.employees * (1 + fs.employees * 0.05);
+    return f.baseIncome * fs.employees * (1 + fs.employees * 0.02);
   }
 
   const PASSIVE_INCOME_MULTIPLIER = 0.7;

@@ -957,7 +957,7 @@ body {
     const badge = document.getElementById("htg-prestige-badge");
     if(state.prestigeLevel > 0){
       badge.style.display = "inline-block";
-      badge.textContent = "✨ Rebirth " + state.prestigeLevel + " (×" + state.prestigeMult + ")";
+      badge.textContent = "✨ Rebirth " + state.prestigeLevel + " (×" + state.prestigeMult.toFixed(1) + ")";
     } else {
       badge.style.display = "none";
     }

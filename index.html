@@ -811,7 +811,7 @@ body {
 
   function triggerRebirthReset() {
     state.prestigeLevel += 1;
-    state.prestigeMult = (state.prestigeLevel + 1) * 2;
+    state.prestigeMult = Math.pow(1.5, state.prestigeLevel);
     
     state.money = 20;
     state.bankBalance = 0;

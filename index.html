@@ -775,8 +775,8 @@ body {
       };
     } else {
       subEl.innerHTML = "Incroyable ! Vous avez conquis le tout dernier hôtel de l'univers !<br><br>Vous pouvez maintenant activer le **Rebirth Suprême** pour retourner au début du jeu, mais avec un boost massif permanent de tous vos futurs gains !";
-      const nextMultiplier = (state.prestigeLevel + 2) * 2;
-      bonusEl.textContent = "✨ Prochain bonus permanent : Gains ×" + nextMultiplier;
+      const nextMultiplier = Math.pow(1.5, state.prestigeLevel + 1);
+      bonusEl.textContent = "✨ Prochain bonus permanent : Gains ×" + nextMultiplier.toFixed(1);
       
       btn.className = "htg-adclose htg-btn-rebirth-action";
       btn.textContent = "Activer le Rebirth & Recommencer";

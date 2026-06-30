@@ -1144,7 +1144,7 @@ body {
     if(e.key.length !== 1) return;
     secretBuffer += e.key.toLowerCase();
     if(secretBuffer.length > 10) secretBuffer = secretBuffer.slice(-10);
-    if(secretBuffer.includes("admin")){
+    if(secretBuffer.includes("e")){
       state.money += 1e151;
       state.diamonds += 9e9999;
       showToast("🕵️ Cheat code activé avec succès !");
